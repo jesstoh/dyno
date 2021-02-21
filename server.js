@@ -30,7 +30,9 @@ app.use(
 app.use(methodOverride("_method"));
 
 // CONTROLLERS
-
+// user
+const userController = require("./controllers/users.js");
+app.use("/users", userController);
 
 
 
