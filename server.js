@@ -31,12 +31,29 @@ app.use(methodOverride("_method"));
 
 // CONTROLLERS
 
+
+
+
 //MONGOOSE CONNECTION
 mongoose.connect(mongoURI, { useNewUrlParser: true });
 db.on("error", (err) => console.log(err.message, "is Mongod not running?"));
 db.on("connected", () => console.log("mongo connected"));
 db.on("disconnected", () => console.log("mongo disconnected"));
 db.once("open", () => console.log("connected to mongo"));
+
+
+// ROUTES
+app.get("/", (req, res) => {
+    //If user does not log in
+    res.render("index.ejs")
+})
+
+
+// MIDDLEWARE
+// Redirect if routes do not exist
+// app.use("*", (req, res) => {
+//     res.redirect("/");
+// })
 
 //SERVER CONNECTION
 app.listen(port, () => {
