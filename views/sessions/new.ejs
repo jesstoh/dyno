@@ -20,11 +20,16 @@
                             <div class="input-field">
                                 <input type="text" name="username" id="username" required>
                                 <label for="username">Username</label>
+                                <% if (wrongUser) { %>
+                                    <p class="red-text">Username not valid</p>
+                                <%} %>
                             </div>
                             <div class="input-field">
                                 <input type="password" name="password" id="password" minLength="6" maxLength="12" class="validate" required>
                                 <label for="password">Password</label>
-                                
+                                <% if (wrongUser) { %>
+                                    <p class="red-text">Username not valid</p>
+                                <%} %>                                
                             </div>
                             <div class="input-field center">
                                 <input type="submit" class="btn blue" value="Log In">
