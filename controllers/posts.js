@@ -9,7 +9,19 @@ const isAuthenticated = require("./helper.js").isAuthenticated;
 
 // New get - new post form
 posts.get("/posts/new", isAuthenticated, (req, res) => {
-    res.render("app/posts/new.ejs", {currentUser: req.session.currentUser});
+    res.render("app/posts/new.ejs", { currentUser: req.session.currentUser });
+});
+
+// Create - create new post
+posts.post("/posts", (req, res) => {
+    req.body.author = req.session.currentUser.username;
+    req.body.tags = req.body.tags.split(",");
+    
+    Post.create(req.body, (err, createdPost) => {
+        console.log(createdPost);
+        res.redirect("back");
+    })
+    
 });
 
 module.exports = posts;
