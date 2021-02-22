@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 // Create Schema
 const postSchema = new Schema(
   {
-    author: {type: Schema.Types.ObjectId, required: true},
+    author: {type: String, required: true},
+    // author: {type: Schema.Types.ObjectId, required: true},
     description: String,
     img: String,
     video: String,
