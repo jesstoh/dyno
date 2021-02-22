@@ -18,8 +18,11 @@
                         <form action="/signup" method="POST">
                             <h5 class="center-align">Welcome to Dyno</h5>
                             <div class="input-field">
-                                <input type="text" name="username" id="username" required>
+                                <input type="text" name="username" id="username" minLength="4" required>
                                 <label for="username">Username</label>
+                                <% if (taken) { %>
+                                    <p class="red-text">Username is already taken</p>
+                                <%} %>
                             </div>
                             <div class="input-field">
                                 <input type="password" name="password" id="password" minLength="6" maxLength="12" class="validate" required>
