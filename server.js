@@ -32,7 +32,11 @@ app.use(methodOverride("_method"));
 // CONTROLLERS
 // user
 const userController = require("./controllers/users.js");
-app.use("/users", userController);
+app.use(userController);
+// session
+const sessionController = require("./controllers/sessions.js");
+app.use(sessionController);
+
 
 
 

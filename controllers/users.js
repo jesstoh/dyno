@@ -7,22 +7,22 @@ const bcrypt = require("bcrypt");
 // ROUTES
 
 // Get New - Sign Up Form
-users.get("/new", (req, res) => {
-  if (!req.session.currentUser) {
+users.get("/signup", (req, res) => {
+//   if (!req.session.currentUser) {
     res.render("users/new.ejs");
-  } else {
-    //If user is already logged in, redirect to home page
-    res.redirect("/home"); 
-  }
+//   } else {
+//     //If user is already logged in, redirect to home page
+//     res.send("user already logged in"); //To redirect to /home
+//   }
 });
 
 // Post - Create new user
-users.post("/", (req, res) => {
+users.post("/signup", (req, res) => {
     // Check if username is already taken
     User.findOne({username: req.body.username}, (err, foundUser) => {
         if (foundUser) {
             console.log("Username is already taken.")
-            res.redirect("/users/new", {taken: true});
+            res.render("users/new.ejs", {taken: true});
         } else {
             req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
             User.create(req.body, (err, userCreated) => {

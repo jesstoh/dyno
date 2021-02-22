@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <%- include("../partials/head.ejs") %>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col s12 l6 push-l6">
+                <nav>
+                    <div class="nav-wrapper blue darken-2">
+                        <a href="/" class="brand-logo center">DYNO</a>
+                        <ul class="right">
+                            <li><a href="/signup">Sign Up</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                    <div class="container section">
+                        <form action="/login" method="POST">
+                            <h5 class="center-align">Welcome back</h5>
+                            <div class="input-field">
+                                <input type="text" name="username" id="username" required>
+                                <label for="username">Username</label>
+                            </div>
+                            <div class="input-field">
+                                <input type="password" name="password" id="password" minLength="6" maxLength="12" class="validate" required>
+                                <label for="password">Password</label>
+                                
+                            </div>
+                            <div class="input-field center">
+                                <input type="submit" class="btn blue" value="Log In">
+                            </div>
+                        </form>
+                        <br>
+                        <div class="row">
+                            Not on Dyno yet? <a href="/signup">Sign Up</a>
+                        </div>
+                    </div>
+     
+            </div>
+            <div class="col s12 l6 pull-l6">
+                <img src="/images/climbing_background.jpg" alt="" class="responsive-img">
+            </div>
+        </div>
+        
+    </body>
+</html>
