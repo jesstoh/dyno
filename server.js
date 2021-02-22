@@ -36,6 +36,9 @@ app.use(userController);
 // session
 const sessionController = require("./controllers/sessions.js");
 app.use(sessionController);
+// app
+const appController = require("./controllers/app.js");
+app.use(appController);
 
 
 
@@ -49,10 +52,6 @@ db.once("open", () => console.log("connected to mongo"));
 
 
 // ROUTES
-app.get("/", (req, res) => {
-    //If user does not log in
-    res.render("index.ejs")
-})
 
 
 // MIDDLEWARE

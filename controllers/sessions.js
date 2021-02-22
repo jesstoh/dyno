@@ -8,7 +8,12 @@ const User = require("../models/users.js");
 
 // New get - login page
 sessions.get("/login", (req, res) => {
-    res.render("sessions/new.ejs", {wrongUser: false, wrongPassword: false});
+    if (!req.session.currentUser) {
+        res.render("sessions/new.ejs", {wrongUser: false, wrongPassword: false});
+    } else {
+        res.redirect("/home"); //Redirect to home page if already logged in
+    }
+    
 });
 
 // Create post - user login
@@ -24,10 +29,10 @@ sessions.post("/login", (req, res) => {
             //Check if password is correct
             if (bcrypt.compareSync(req.body.password, foundUser.password)) {
                 req.session.currentUser = foundUser;
-                res.send("password is correct");
+                // res.send("password is correct");
                 // console.log("success");
                 //redirect to home page if password is correct
-                // res.redirect("/home");
+                res.redirect("/home");
             } else {
                 //Rendering login page with error message if incorrect password
                 res.render("sessions/new.ejs", { wrongUser: false, wrongPassword: true });
