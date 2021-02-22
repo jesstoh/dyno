@@ -17,21 +17,27 @@
                     <div class="container section">
                         <form action="/signup" method="POST">
                             <h5 class="center-align">Welcome to Dyno</h5>
-                            <div class="input-field">
-                                <input type="text" name="username" id="username" minLength="4" required>
-                                <label for="username">Username</label>
-                                <% if (taken) { %>
-                                    <p class="red-text">Username is already taken</p>
-                                <%} %>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="text" name="username" id="username" minLength="4" required>
+                                    <label for="username">Username</label>
+                                    <% if (taken) { %>
+                                        <p class="red-text">Username is already taken</p>
+                                    <%} %>
+                                </div>
                             </div>
-                            <div class="input-field">
-                                <input type="password" name="password" id="password" minLength="6" maxLength="12" class="validate" required>
-                                <label for="password">Password</label>
-                                
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="password" name="password" id="password" minLength="6" maxLength="12" class="validate" required>
+                                    <label for="password">Password</label>
+                                    
+                                </div>
                             </div>
-                            <div class="input-field center">
-                                <input type="submit" class="btn blue" value="Sign Up">
-                            </div>
+                            <div class="row">
+                                <div class="input-field center">
+                                    <input type="submit" class="btn blue" value="Sign Up">
+                                </div>
+                            </div>                            
                         </form>
                         <br>
                         <div class="row">
