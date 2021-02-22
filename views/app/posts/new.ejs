@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include("../../partials/head.ejs") %>
+    </head>
+    <body>
+        <header>
+            <%- include("../../partials/nav.ejs") %>
+        </header>
+        <main>
+            <%- include("../../partials/main.ejs") %>
+            <div class="container">
+                <form action="/posts" method="POST">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="url" id="img" name="img">
+                            <label for="img">Image URL</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" id="description" name="description">
+                            <label for="description">Description</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" id="location" name="location">
+                            <label for="location">Location</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" id="tags" name="tags">
+                            <label for="tags">Tags</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 center-align">
+                            <button class="btn blue" type="submit">POST</button>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+
+        </main>
+        <footer>
+
+        </footer>
+        
+    </body>
+</html>

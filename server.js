@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const path = require("path");
+const isAuthenticated = require("./controllers/helper.js").isAuthenticated;
 
 const port = process.env.PORT || 3000;
 const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/dyno";

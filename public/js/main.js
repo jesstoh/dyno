@@ -1,0 +1,5 @@
+$(() => {
+
+    $(".fixed-action-btn").floatingActionButton();
+
+})
