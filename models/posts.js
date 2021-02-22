@@ -11,8 +11,8 @@ const postSchema = new Schema(
     video: String,
     location: String,
     tags: [String],
-    likes: [Schema.Types.ObjectId],
-    comments: [{user: Schema.Types.ObjectId, message: String}]
+    likes: [String], //use username instead of Schema.Types.ObjectId as user route is not by id
+    comments: [{userId: Schema.Types.ObjectId, user: String, message: String}]
   },
   { timestamps: true }
 );
