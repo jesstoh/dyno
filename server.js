@@ -20,11 +20,11 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 // session
 app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
+    session({
+        secret: process.env.SECRET,
+        resave: false,
+        saveUninitialized: false,
+    })
 );
 // method-override
 app.use(methodOverride("_method"));
@@ -39,9 +39,9 @@ app.use(sessionController);
 // app
 const appController = require("./controllers/app.js");
 app.use(appController);
-
-
-
+// posts
+const postController = require("./controllers/posts.js");
+app.use(postController);
 
 //MONGOOSE CONNECTION
 mongoose.connect(mongoURI, { useNewUrlParser: true });
@@ -50,9 +50,7 @@ db.on("connected", () => console.log("mongo connected"));
 db.on("disconnected", () => console.log("mongo disconnected"));
 db.once("open", () => console.log("connected to mongo"));
 
-
 // ROUTES
-
 
 // MIDDLEWARE
 // Redirect if routes do not exist
@@ -62,5 +60,5 @@ db.once("open", () => console.log("connected to mongo"));
 
 //SERVER CONNECTION
 app.listen(port, () => {
-  console.log("Listening at port", port);
+    console.log("Listening at port", port);
 });
