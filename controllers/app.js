@@ -25,4 +25,8 @@ apps.get("/home", isAuthenticated, (req, res) => {
     });
 });
 
+apps.get("/back", (req, res) => {
+    res.redirect("back");
+})
+
 module.exports = apps;
