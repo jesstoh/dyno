@@ -12,27 +12,35 @@
 
             <div class="container post-container section">
                 <div class="row">
-                    <div class="col s12 m6 l4">
-                        <div class="card hoverable">
-                            <div class="card-image">
-                                <% if (post.img) {%>
-                                    <img src="<%=post.img%>" alt="">
-                                <%} else {%>
-                                    <video src="<%=post.video%>"></video>
-                                <%}%>
-                            </div>
-                            <div class="card-content">
-                                <span>Likes: <%=post.likes.length%></span>
-                                <span>Author: <a href="/users/<%=post.author%>"><%=post.author%></a></span><br>
+                    <% posts.forEach(post => { %>
+                        <div class="col s12 m6 l4">
+                            <div class="card hoverable medium">
                                 
-                                <span>location: <%=post.location%></span>
-                                
-                                <p><%=post.description%></p>
-                                <span>tags: <%=post.tags%></span><br>
-                                <span><%=post.createdAt%></span>
+                                <div class="card-image">
+                                    <% if (post.img) {%>
+                                        <img src="<%=post.img%>" alt="">
+                                    <%} else {%>
+                                        <div class="video-container">
+                                            <iframe src="<%=post.video%>" frameborder="0" allowfullscreen></iframe>
+                                          </div>
+                                        
+                                    <%}%>
+                                </div>
+                                <div class="card-content">
+                                    <span>Likes: <%=post.likes.length%></span>
+                                    <span>Author: <a href="/users/<%=post.author%>"><%=post.author%></a></span><br>
+                                    
+                                    <span>location: <%=post.location%></span>
+                                    
+                                    <p><%=post.description%></p>
+                                    <span>tags: <%=post.tags%></span><br>
+                                    <span class="grey-text"><%=post.createdAt%></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                                
+                    <%})%>
+                    
                 </div>
             </div>
 

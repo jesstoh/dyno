@@ -19,7 +19,7 @@ posts.post("/posts", (req, res) => {
     
     Post.create(req.body, (err, createdPost) => {
         console.log(createdPost);
-        res.redirect("back");
+        res.redirect("/home");
     })
     
 });

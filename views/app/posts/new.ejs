@@ -2,6 +2,8 @@
 <html lang="en">
     <head>
         <%- include("../../partials/head.ejs") %>
+        <link rel="stylesheet" href="/css/new_post.css">
+        <script src="/js/new_post.js"></script>
     </head>
     <body>
         <header>
@@ -15,6 +17,12 @@
                         <div class="input-field col s12">
                             <input type="url" id="img" name="img">
                             <label for="img">Image URL</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input type="url" id="video" name="video">
+                            <label for="video">Video URL</label>
                         </div>
                     </div>
                     <div class="row">
@@ -35,15 +43,22 @@
                             <label for="tags">Tags</label>
                         </div>
                     </div>
+                    <!-- <div class="row">
+                        <div class="input-field col s12">
+                            <input type="text" id="tags" name="tags">
+                            <label for="tags">Tags</label>
+                        </div>
+                    </div> -->
+
                     <div class="row">
                         <div class="input-field col s12 center-align">
                             <button class="btn blue" type="submit">POST</button>
                         </div>
                     </div>
+
                     
                 </form>
             </div>
-
         </main>
         <footer>
 
