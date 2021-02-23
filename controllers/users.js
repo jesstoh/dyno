@@ -2,7 +2,9 @@
 const express = require("express");
 const users = express.Router();
 const User = require("../models/users.js");
+const Post = require("../models/posts.js");
 const bcrypt = require("bcrypt");
+const isAuthenticated = require("./helper.js").isAuthenticated;
 
 // ROUTES
 
@@ -35,6 +37,29 @@ users.post("/signup", (req, res) => {
                 res.redirect("/home");
             });
         }
+    });
+});
+
+// Show user - each user profile page
+users.get("/users/:name", isAuthenticated, (req, res) => {
+    User.findOne({ username: req.params.name }, (err, foundUser) => {
+        if (foundUser) {
+            if (!foundUser.img) {
+                foundUser.img = "/images/logo.png"
+            }
+
+            Post.find({ author: req.params.name }, (err, foundPosts) => {
+                res.render("users/show.ejs", {
+                    currentUser: req.session.currentUser,
+                    user: foundUser,
+                    posts: foundPosts
+                });
+            });
+        } else {
+            //Redirecting if user is not in database
+            res.redirect("/");
+        }
+        
     });
 });
 
