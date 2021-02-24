@@ -103,30 +103,30 @@
             </div>
             
 
-        </main>
-        <div class="modal" id="following">
-  
-            <div class="modal-content">
-                <div class="modal-footer">
-                    <a href="#" class="modal-close modal-action right"><i class="material-icons">close</i></a>
+        
+            <div class="modal" id="following">
+    
+                <div class="modal-content">
+                    <div class="modal-footer">
+                        <a href="#" class="modal-close modal-action right"><i class="material-icons">close</i></a>
+                    </div>
+                    
+                    
+                    <h6 class="center-align"><strong>Following</strong></h6>
+                    <ul class="collection">
+                        <% user.following.forEach(followingUser => {%>
+                            <li class="collection-item">
+                                <a href="/users/<%=followingUser%>"><%=followingUser%></a>
+                            </li>
+                        <%})%>
+
+                    </ul>
+                    
                 </div>
-                
-                
-                <h6 class="center-align"><strong>Following</strong></h6>
-                <ul class="collection">
-                    <% user.following.forEach(followingUser => {%>
-                        <li class="collection-item">
-                            <a href="/users/<%=followingUser%>"><%=followingUser%></a>
-                        </li>
-                    <%})%>
-
-                </ul>
-                
             </div>
-        </div>
- 
+        </main>
         <footer>
-
+            <%- include("../partials/footer.ejs") %>
         </footer>
     </body>
 </html>
