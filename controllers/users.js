@@ -89,7 +89,7 @@ users.get("/users/:name", isAuthenticated, (req, res) => {
             if (!foundUser.img) {
                 foundUser.img = "/images/logo.png";
             }
-            console.log(req.session.currentUser.following.includes(foundUser.username));
+            // console.log(req.session.currentUser.following.includes(foundUser.username));
             Post.find({ author: req.params.name }, (err, foundPosts) => {
                 res.render("users/show.ejs", {
                     currentUser: req.session.currentUser,

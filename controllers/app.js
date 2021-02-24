@@ -31,7 +31,7 @@ apps.get("/following", isAuthenticated, (req, res) => {
     Post.find({ author: { $in: req.session.currentUser.following } })
         .sort({_id: -1})
         .exec((err, posts) => {
-            res.render("app/index.ejs", {
+            res.render("app/posts/index.ejs", {
                 currentUser: req.session.currentUser,
                 posts,
             });
