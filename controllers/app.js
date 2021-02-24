@@ -17,7 +17,7 @@ apps.get("/", (req, res) => {
 // Get home - home page when logged in (showing all posts)
 apps.get("/home", isAuthenticated, (req, res) => {
     Post.find({}, (err, posts) => {
-        console.log(posts)
+        // console.log(posts)
         res.render("app/index.ejs", {
             currentUser: req.session.currentUser,
             posts

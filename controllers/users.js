@@ -18,6 +18,27 @@ users.get("/signup", (req, res) => {
     }
 });
 
+// Update put - follow other user
+users.put("/users/:name/follow", (req, res) => {
+    const currentUser = req.session.currentUser;
+    const user = req.params.name;
+    User.findOneAndUpdate(
+        { username: currentUser.username },
+        { $push: { following: req.params.name } }, {new: true},
+        (err, updatedUser) => {
+            req.session.currentUser = updatedUser; //Update user detail in current session
+            User.findOneAndUpdate(
+                { username: req.params.name },
+                { $push: { followers: currentUser.username } }, {new: true},
+                (err, followingUser) => {
+                    // console.log(followingUser)
+                    res.redirect("/home");
+                }
+            );
+        }
+    );
+});
+
 // Post - Create new user
 users.post("/signup", (req, res) => {
     // Check if username is already taken
@@ -45,21 +66,20 @@ users.get("/users/:name", isAuthenticated, (req, res) => {
     User.findOne({ username: req.params.name }, (err, foundUser) => {
         if (foundUser) {
             if (!foundUser.img) {
-                foundUser.img = "/images/logo.png"
+                foundUser.img = "/images/logo.png";
             }
-
+            console.log(req.session.currentUser.following.includes(foundUser.username));
             Post.find({ author: req.params.name }, (err, foundPosts) => {
                 res.render("users/show.ejs", {
                     currentUser: req.session.currentUser,
                     user: foundUser,
-                    posts: foundPosts
+                    posts: foundPosts,
                 });
             });
         } else {
             //Redirecting if user is not in database
             res.redirect("/");
         }
-        
     });
 });
 

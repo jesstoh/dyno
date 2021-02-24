@@ -36,14 +36,14 @@
                         
                             <a href="/accounts/edit" class="btn grey"><i class="material-icons left">edit</i>Edit Profile</a>
                         
-                        <%} else if (user.username in currentUser.following) {%>
+                        <%} else if (currentUser.following.includes(user.username)) {%>
                             <form action="/users/<%=user.username%>/unfollow?_method=PUT" method="POST">
                                 <input type="submit" class="btn blue following-btn" value="Following">
                             </form>
                         <%} else {%>
                             <form action="/users/<%=user.username%>/follow?_method=PUT" method="POST">
                                 <button type="submit" class="btn blue">
-                                    <% if (user.username in currentUser.followers) {%>
+                                    <% if (currentUser.followers.includes(user.username)) {%>
                                         Follow Back
                                     <%} else { %>
                                         Follow
