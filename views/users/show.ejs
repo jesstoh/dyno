@@ -117,6 +117,14 @@
                         <% user.following.forEach(followingUser => {%>
                             <li class="collection-item">
                                 <a href="/users/<%=followingUser%>"><%=followingUser%></a>
+  
+                                <% if (currentUser.username === user.username) { %>
+                                    <form action="/users/<%=followingUser%>/unfollow?_method=PUT" method="POST" class="secondary-content">
+                                        <input type="submit" class="blue btn-small" value="Unfollow">
+                                    </form>
+
+                                <%}%>
+                                    
                             </li>
                         <%})%>
 

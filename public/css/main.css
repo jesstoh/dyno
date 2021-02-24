@@ -1,6 +1,17 @@
 * {
     /* border: 2px solid red; */
+}
 
+form {
+    /* display: inline; */
+    /* margin-bottom: 10px; */
+    /* align-items: center; */
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 
