@@ -16,13 +16,13 @@ apps.get("/", (req, res) => {
 
 // Get home - home page when logged in (showing all posts)
 apps.get("/home", isAuthenticated, (req, res) => {
-    Post.find({}, (err, posts) => {
-        // console.log(posts)
+
+    Post.find().sort({createdAt: -1}).exec((err, posts) => {
         res.render("app/index.ejs", {
             currentUser: req.session.currentUser,
             posts
         });
-    });
+    })
 });
 
 apps.get("/back", (req, res) => {

@@ -32,7 +32,7 @@ users.put("/users/:name/follow", (req, res) => {
                 { $push: { followers: currentUser.username } }, {new: true},
                 (err, followingUser) => {
                     // console.log(followingUser)
-                    res.redirect("/home");
+                    res.redirect("back");
                 }
             );
         }
@@ -53,7 +53,7 @@ users.put("/users/:name/unfollow", (req, res) => {
                 { $pull: { followers: currentUser.username } }, {new: true},
                 (err, followingUser) => {
                     // console.log(followingUser)
-                    res.redirect("/home");
+                    res.redirect("back");
                 }
             );
         }
