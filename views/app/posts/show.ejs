@@ -34,6 +34,11 @@
                             <p><%=post.description%></p>
                             <span>tags: <%=post.tags%></span><br>
                             <span class="grey-text"><%=post.createdAt%></span>
+                            
+                            <% if (currentUser.username === post.author) {%>
+                                <a href="/posts/<%=post._id%>/edit" class="btn">Edit</a>
+                            <%}%>
+                            
                         </div>
                     </div>
                 </div>

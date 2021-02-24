@@ -22,6 +22,22 @@ posts.get("/posts/:id", isAuthenticated, (req, res) => {
     });
 });
 
+// Edit get - form to edit post
+posts.get("/posts/:id/edit", isAuthenticated, (req, res) => {
+    Post.findById(req.params.id, (err, foundPost) => {
+
+        // Check if current user is author of the post before displaying form
+        if (req.session.currentUser.username === foundPost.author) {
+            res.render("app/posts/edit.ejs", {
+                currentUser: req.session.currentUser,
+                post: foundPost,
+            });
+        } else {
+            res.redirect("/");
+        }
+    });
+});
+
 // Create - create new post
 posts.post("/posts", (req, res) => {
     req.body.author = req.session.currentUser.username;
