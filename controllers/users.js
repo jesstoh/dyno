@@ -39,6 +39,27 @@ users.put("/users/:name/follow", (req, res) => {
     );
 });
 
+// Update put - unfollow other user
+users.put("/users/:name/unfollow", (req, res) => {
+    const currentUser = req.session.currentUser;
+    const user = req.params.name;
+    User.findOneAndUpdate(
+        { username: currentUser.username },
+        { $pull: { following: req.params.name } }, {new: true},
+        (err, updatedUser) => {
+            req.session.currentUser = updatedUser; //Update user detail in current session
+            User.findOneAndUpdate(
+                { username: req.params.name },
+                { $pull: { followers: currentUser.username } }, {new: true},
+                (err, followingUser) => {
+                    // console.log(followingUser)
+                    res.redirect("/home");
+                }
+            );
+        }
+    );
+});
+
 // Post - Create new user
 users.post("/signup", (req, res) => {
     // Check if username is already taken
