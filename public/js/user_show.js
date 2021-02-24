@@ -1,7 +1,16 @@
 $(() => {
+    // Initialization of modal
     $(".modal").modal();
 
-    // $(":not(.modal-content)").on("click", (event) => {
-    //     $(".modal").modal("close");
-    // });
+    // Change following button style when hover over 
+    $(".following-btn").hover(
+        (event) => {
+            $(event.currentTarget).val("Unfollow").removeClass("blue").addClass("red");
+        },
+        (event) => {
+            $(event.currentTarget).val("Following").removeClass("red").addClass("blue");;
+        }
+    );
+
+    
 });
