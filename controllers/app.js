@@ -14,19 +14,32 @@ apps.get("/", (req, res) => {
     }
 });
 
-// Get home - home page when logged in (showing all posts)
+// Index get - home page when logged in (showing all posts)
 apps.get("/home", isAuthenticated, (req, res) => {
-
-    Post.find().sort({createdAt: -1}).exec((err, posts) => {
-        res.render("app/index.ejs", {
-            currentUser: req.session.currentUser,
-            posts
+    Post.find()
+        .sort({ _id: -1 })
+        .exec((err, posts) => {
+            res.render("app/index.ejs", {
+                currentUser: req.session.currentUser,
+                posts,
+            });
         });
-    })
 });
 
-apps.get("/back", (req, res) => {
-    res.redirect("back");
-})
+// Index get - posts of all following users
+apps.get("/following", isAuthenticated, (req, res) => {
+    Post.find({ author: { $in: req.session.currentUser.following } })
+        .sort({_id: -1})
+        .exec((err, posts) => {
+            res.render("app/index.ejs", {
+                currentUser: req.session.currentUser,
+                posts,
+            });
+        });
+});
+
+// apps.get("/back", (req, res) => {
+//     res.redirect("back");
+// });
 
 module.exports = apps;
