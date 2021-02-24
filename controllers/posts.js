@@ -38,6 +38,18 @@ posts.get("/posts/:id/edit", isAuthenticated, (req, res) => {
     });
 });
 
+// Update get - update post
+posts.put("/posts/:id", isAuthenticated, (req, res) => {
+    req.body.tags = req.body.tags.split(",");
+    req.body.edited = true;
+    console.log(req.body);
+    Post.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, (err, updatedPost) => {
+        console.log(updatedPost);
+        res.redirect(`/posts/${req.params.id}`);
+
+    })
+})
+
 // Create - create new post
 posts.post("/posts", (req, res) => {
     req.body.author = req.session.currentUser.username;

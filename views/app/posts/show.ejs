@@ -36,7 +36,7 @@
                             <span class="grey-text"><%=post.createdAt%></span>
                             
                             <% if (currentUser.username === post.author) {%>
-                                <a href="/posts/<%=post._id%>/edit" class="btn">Edit</a>
+                                <a href="/posts/<%=post._id%>/edit" class="btn-floating orange"><i class="material-icons">edit</i></a>
                             <%}%>
                             
                         </div>
