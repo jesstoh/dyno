@@ -42,4 +42,8 @@ apps.get("/following", isAuthenticated, (req, res) => {
 //     res.redirect("back");
 // });
 
+apps.get("/dummy", (req, res) => {
+    res.render("users/edit.ejs")
+})
+
 module.exports = apps;

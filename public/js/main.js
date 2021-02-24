@@ -5,8 +5,9 @@ $(() => {
     })
 
 
-    $('.fixed-action-btn').floatingActionButton();
-    
 
+    $(".fixed-action-btn").floatingActionButton();
+    
+    // $(".modal").modal();
     
 })
