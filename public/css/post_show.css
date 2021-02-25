@@ -1,5 +1,6 @@
-#like:hover, #comment:hover {
+#like:hover, #comment:hover, .comment-show {
     cursor: pointer;
+
 }
 
 textarea {
@@ -14,4 +15,22 @@ textarea {
 
 .comment-box {
     display: none;
+}
+
+.main-comments-container {
+    border-top: 0.5px solid lightgrey;
+    display: none;
+}
+
+.comment-container {
+    margin: 1.5rem 0;
+}
+
+.comment-date {
+    font-size: smaller;
+}
+
+
+span, i {
+    margin-right: 1rem;
 }

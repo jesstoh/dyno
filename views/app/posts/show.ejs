@@ -37,10 +37,10 @@
                                 <%}%>
                                 
                                 <i class="material-icons" id="comment">chat_bubble_outline</i>
-                                <span class="right">Author: <a href="/users/<%=post.author%>"><%=post.author%></a></span>
+                                <span class="right">by <a href="/users/<%=post.author%>"><%=post.author%></a></span>
                             </div>
-                            <span><%=post.likes.length%> Likes </span>
-                            <span><a href="" class="black-text"><%=post.comments.length%> Comments</a></span>
+                            <span><strong><%=post.likes.length%> Likes</strong>  </span>
+                            <span class="comment-show"><strong><%=post.comments.length%> Comments</strong> </span>
                             
                             <span class="right">location: <%=post.location%></span><br>
                             <p><%=post.description%></p>
@@ -56,7 +56,7 @@
                         <div class="card-action comment-box">
                             <div class="row">
                                 <form action="/posts/<%=post._id%>/comment" method="POST">
-                                    <textarea name="message" id="message" placeholder="Add a comment"></textarea> 
+                                    <textarea name="message" id="message" placeholder="Add a comment" required></textarea> 
                                     <button class="btn-small blue grey right" id="cancel-button">Cancel</button>                                  
                                     <input type="submit" class="btn-small blue right" value="POST">
                                     
@@ -64,6 +64,17 @@
                                 </form>                              
                             </div>
                             
+                        </div>
+                        <div class="main-comments-container card-content">
+                            <% post.comments.forEach(comment => {%>
+                                <div class="comment-container">
+                                    <a href="/users/<%=comment.user%>"><%=comment.user%> </a> <span class="grey-text comment-date"><%=comment.createdAt%></span> <br>
+                                    <span class="comment-details"><%=comment.message%></span>
+                                    
+                                </div>
+
+                            <%})%>
+
                         </div>
                     </div>
                 </div>
