@@ -25,7 +25,6 @@ posts.get("/posts/:id", isAuthenticated, (req, res) => {
 // Edit get - form to edit post
 posts.get("/posts/:id/edit", isAuthenticated, (req, res) => {
     Post.findById(req.params.id, (err, foundPost) => {
-
         // Check if current user is author of the post before displaying form
         if (req.session.currentUser.username === foundPost.author) {
             res.render("app/posts/edit.ejs", {
@@ -43,12 +42,16 @@ posts.put("/posts/:id", isAuthenticated, (req, res) => {
     req.body.tags = req.body.tags.split(",");
     req.body.edited = true;
     console.log(req.body);
-    Post.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true}, (err, updatedPost) => {
-        console.log(updatedPost);
-        res.redirect(`/posts/${req.params.id}`);
-
-    })
-})
+    Post.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true },
+        (err, updatedPost) => {
+            console.log(updatedPost);
+            res.redirect(`/posts/${req.params.id}`);
+        }
+    );
+});
 
 // Create - create new post
 posts.post("/posts", (req, res) => {
@@ -59,6 +62,21 @@ posts.post("/posts", (req, res) => {
         console.log(createdPost);
         res.redirect("/home");
     });
+});
+
+// Create post - create new comment
+posts.post("/posts/:id/comment", isAuthenticated, (req, res) => {
+    req.body.user = req.session.currentUser.username;
+    console.log(req.body);
+    Post.findByIdAndUpdate(
+        req.params.id,
+        { $push: { comments: req.body } },
+        { new: true },
+        (err, updatedPost) => {
+            console.log(updatedPost);
+            res.redirect("back");
+        }
+    );
 });
 
 module.exports = posts;

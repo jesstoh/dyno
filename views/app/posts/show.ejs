@@ -6,6 +6,7 @@
     <body>
         <header>
             <%- include("../../partials/nav.ejs") %>
+            <link rel="stylesheet" href="/css/posts.css">
         </header>
         <main class="section">
             <%- include("../../partials/main.ejs") %>
@@ -26,18 +27,40 @@
                             <%}%>
                         </div>
                         <div class="card-content">
-                            <span>Likes: <%=post.likes.length%></span>
-                            <span>Author: <a href="/users/<%=post.author%>"><%=post.author%></a></span><br>
+                            <div>
+                                <% if (!post.likes.includes(currentUser.username)) {%>
+                                    <i class="material-icons" id="like">favorite_border</i> 
+                                <%} else {%>
+                                    <i class="material-icons red-text" id="like">favorite</i> 
+                                <%}%>
+                                
+                                <i class="material-icons" id="comment">chat_bubble_outline</i>
+                                <span class="right">Author: <a href="/users/<%=post.author%>"><%=post.author%></a></span>
+                            </div>
+                            <span><%=post.likes.length%> Likes </span>
+                            <span><a href="" class="black-text"><%=post.comments.length%> Comments</a></span>
                             
-                            <span>location: <%=post.location%></span>
-                            
+                            <span class="right">location: <%=post.location%></span><br>
                             <p><%=post.description%></p>
+                            
                             <span>tags: <%=post.tags%></span><br>
                             <span class="grey-text"><%=post.createdAt%></span>
                             
                             <% if (currentUser.username === post.author) {%>
                                 <a href="/posts/<%=post._id%>/edit" class="btn-floating orange"><i class="material-icons">edit</i></a>
                             <%}%>
+                            
+                        </div>
+                        <div class="card-action comment-box">
+                            <div class="row">
+                                <form action="/posts/<%=post._id%>/comment" method="POST">
+                                    <textarea name="message" id="message" placeholder="Add a comment"></textarea> 
+                                    <button class="btn-small blue grey right" id="post-button">Cancel</button>                                  
+                                    <input type="submit" class="btn-small blue right" value="POST">
+                                    
+                                    
+                                </form>                              
+                            </div>
                             
                         </div>
                     </div>

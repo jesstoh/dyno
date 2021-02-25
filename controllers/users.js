@@ -24,12 +24,14 @@ users.put("/users/:name/follow", (req, res) => {
     const user = req.params.name;
     User.findOneAndUpdate(
         { username: currentUser.username },
-        { $push: { following: req.params.name } }, {new: true},
+        { $push: { following: req.params.name } },
+        { new: true },
         (err, updatedUser) => {
             req.session.currentUser = updatedUser; //Update user detail in current session
             User.findOneAndUpdate(
                 { username: req.params.name },
-                { $push: { followers: currentUser.username } }, {new: true},
+                { $push: { followers: currentUser.username } },
+                { new: true },
                 (err, followingUser) => {
                     // console.log(followingUser)
                     res.redirect("back");
@@ -45,12 +47,14 @@ users.put("/users/:name/unfollow", (req, res) => {
     const user = req.params.name;
     User.findOneAndUpdate(
         { username: currentUser.username },
-        { $pull: { following: req.params.name } }, {new: true},
+        { $pull: { following: req.params.name } },
+        { new: true },
         (err, updatedUser) => {
             req.session.currentUser = updatedUser; //Update user detail in current session
             User.findOneAndUpdate(
                 { username: req.params.name },
-                { $pull: { followers: currentUser.username } }, {new: true},
+                { $pull: { followers: currentUser.username } },
+                { new: true },
                 (err, followingUser) => {
                     // console.log(followingUser)
                     res.redirect("back");
@@ -103,5 +107,13 @@ users.get("/users/:name", isAuthenticated, (req, res) => {
         }
     });
 });
+
+// Edit get - user profile edit route
+// users.get("/account/edit", isAuthenticated, (req, res) => {
+//     User.findById(req.session.currentUser._id, (err, foundUser) => {
+//         res.render("users/account/edit.ejs"),
+//             { currentUser: req.session.currentUser };
+//     });
+// });
 
 module.exports = users;
