@@ -2,11 +2,13 @@
 <html lang="en">
     <head>
         <%- include("../../partials/head.ejs") %>
+        <link rel="stylesheet" href="/css/post_show.css">
+        <script src="/js/post_show.js"></script>
     </head>
     <body>
         <header>
             <%- include("../../partials/nav.ejs") %>
-            <link rel="stylesheet" href="/css/posts.css">
+            
         </header>
         <main class="section">
             <%- include("../../partials/main.ejs") %>
@@ -55,7 +57,7 @@
                             <div class="row">
                                 <form action="/posts/<%=post._id%>/comment" method="POST">
                                     <textarea name="message" id="message" placeholder="Add a comment"></textarea> 
-                                    <button class="btn-small blue grey right" id="post-button">Cancel</button>                                  
+                                    <button class="btn-small blue grey right" id="cancel-button">Cancel</button>                                  
                                     <input type="submit" class="btn-small blue right" value="POST">
                                     
                                     
