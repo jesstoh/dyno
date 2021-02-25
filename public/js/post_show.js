@@ -1,6 +1,7 @@
 $(() => {
     // Show comment box when click on comment icon
     $("#comment").on("click", () => {
+        
         $(".comment-box").toggle("display");
     });
 
@@ -16,4 +17,6 @@ $(() => {
     $(".comment-show").on("click", () => {
         $(".main-comments-container").toggle("display");
     })
+
+    $(".modal").modal();
 });

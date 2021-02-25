@@ -39,14 +39,17 @@
                                 <i class="material-icons" id="comment">chat_bubble_outline</i>
                                 <span class="right">by <a href="/users/<%=post.author%>"><%=post.author%></a></span>
                             </div>
-                            <span><strong><%=post.likes.length%> Likes</strong>  </span>
+                            <span><a href="#like-list" class="modal-trigger black-text"><strong><%=post.likes.length%> Likes</strong></a> </span>
                             <span class="comment-show"><strong><%=post.comments.length%> Comments</strong> </span>
                             
                             <span class="right">location: <%=post.location%></span><br>
                             <p><%=post.description%></p>
                             
                             <span>tags: <%=post.tags%></span><br>
-                            <span class="grey-text"><%=post.createdAt%></span>
+                            <span class="grey-text"><%=post.createdAt%></span> 
+                            <% if (post.edited) {%>
+                                <span>Edited</span>
+                            <%}%>
                             
                             <% if (currentUser.username === post.author) {%>
                                 <a href="/posts/<%=post._id%>/edit" class="btn-floating orange"><i class="material-icons">edit</i></a>
@@ -77,6 +80,21 @@
 
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="modal" id="like-list">
+    
+                <div class="modal-content">
+                    <div class="modal-footer">
+                        <a href="#" class="modal-close modal-action right"><i class="material-icons">close</i></a>
+                    </div>
+                    
+                    
+                    <h6 class="center-align"><strong>Likes</strong></h6>
+                    <iframe src="/posts/<%=post._id%>/like" frameborder="0" height="500" width="100%"></iframe>
+                    
+                    
                 </div>
             </div>
                 

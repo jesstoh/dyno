@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <%- include("../../partials/head.ejs") %>
+        <link rel="stylesheet" href="/css/posts.css">
         <script src="/js/posts.js"></script>
     </head>
     <body>
@@ -20,10 +21,10 @@
                     <% posts.forEach(post => { %>
                         <div class="col s12 m6 l4">
                             <div class="card hoverable medium post-card">
-                                <a href="/posts/<%=post._id%>" class="post-link"></a>
+                                
                                 <div class="card-image">
                                     <% if (post.img) {%>
-                                        <img src="<%=post.img%>" alt="">
+                                        <img src="<%=post.img%>" class="materialboxed">
                                     <%} else {%>
                                         <div class="video-container">
                                             <iframe src="<%=post.video%>" frameborder="0" allowfullscreen></iframe>
@@ -32,6 +33,7 @@
                                     <%}%>
                                 </div>
                                 <div class="card-content">
+                                    <a href="/posts/<%=post._id%>" class="post-link"></a>
                                     <span>Likes: <%=post.likes.length%></span>
                                     <span>Author: <a href="/users/<%=post.author%>"><%=post.author%></a></span><br>
                                     

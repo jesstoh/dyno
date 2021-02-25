@@ -1,8 +1,9 @@
 $(() => {
 
-    $(".post-card").on("click", (event) => {
+    $(".post-card .card-content").on("click", (event) => {
         window.location = $(event.currentTarget).find(".post-link").attr("href")
     });
 
+    $(".materialboxed").materialbox();
 
 })

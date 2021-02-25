@@ -22,6 +22,16 @@ posts.get("/posts/:id", isAuthenticated, (req, res) => {
     });
 });
 
+// Index get - show like list
+posts.get("/posts/:id/like", isAuthenticated, (req, res) => {
+    Post.findById(req.params.id, (err, foundPost) => {
+        res.render("users/index.ejs", {
+            currentUser: req.session.currentUser,
+            users: foundPost.likes,
+        });
+    });
+});
+
 // Edit get - form to edit post
 posts.get("/posts/:id/edit", isAuthenticated, (req, res) => {
     Post.findById(req.params.id, (err, foundPost) => {
