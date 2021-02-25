@@ -90,14 +90,8 @@
                         <a href="#" class="modal-close modal-action right"><i class="material-icons">close</i></a>
                     </div>
                     <h6 class="center-align"><strong>Followers</strong></h6>
-                    <ul class="collection">
-                        <% user.followers.forEach(follower => {%>
-                            <li class="collection-item">
-                                <a href="/users/<%=follower%>"><%=follower%></a>
-                            </li>
-                        <%})%>
-
-                    </ul>
+                    <iframe src="/users/<%=user.username%>/followers" frameborder="0" height="500" width="100%"></iframe>
+                    
                     
                 </div>
             </div>
@@ -113,22 +107,8 @@
                     
                     
                     <h6 class="center-align"><strong>Following</strong></h6>
-                    <ul class="collection">
-                        <% user.following.forEach(followingUser => {%>
-                            <li class="collection-item">
-                                <a href="/users/<%=followingUser%>"><%=followingUser%></a>
-  
-                                <% if (currentUser.username === user.username) { %>
-                                    <form action="/users/<%=followingUser%>/unfollow?_method=PUT" method="POST" class="secondary-content">
-                                        <input type="submit" class="blue btn-small" value="Unfollow">
-                                    </form>
-
-                                <%}%>
-                                    
-                            </li>
-                        <%})%>
-
-                    </ul>
+                    <iframe src="/users/<%=user.username%>/following" frameborder="0" height="500" width="100%"></iframe>
+                    
                     
                 </div>
             </div>

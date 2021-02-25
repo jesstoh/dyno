@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include("../partials/head.ejs") %>
+        <script src="/js/user_show.js"></script>
+    </head>
+    <body>
+        <main>
+
+            <div>
+                <ul class="collection">
+                    <% users.forEach(user => {%>
+                        <li class="collection-item">
+                            <a href="/users/<%=user%>" target="_PARENT"><%=user%></a>
+
+                            <% if (currentUser.username !== user) { 
+                                if (currentUser.following.includes(user)) { %>
+                                    <form action="/users/<%=user%>/unfollow?_method=PUT" method="POST" class="secondary-content">
+                                        <input type="submit" class="blue btn-small" value="Following">
+                                    </form>
+
+                                <%} else {%>
+                                    <form action="/users/<%=user%>/follow?_method=PUT" method="POST" class="secondary-content">
+                                        <input type="submit" class="blue btn-small" value="Follow">
+                                    </form>
+                                <%}
+                              }%>
+                                
+                        </li>
+                    <%})%>
+
+                </ul>
+
+            </div>
+
+        </main>
+
+    </body>
+</html>

@@ -108,6 +108,27 @@ users.get("/users/:name", isAuthenticated, (req, res) => {
     });
 });
 
+// Index get - show follower list
+users.get("/users/:name/followers", isAuthenticated, (req, res) => {
+    User.findOne({ username: req.params.name }, (err, foundUser) => {
+        res.render("users/index.ejs", {
+            currentUser: req.session.currentUser,
+            users: foundUser.followers,
+        });
+    });
+});
+
+// Index get - show following list
+users.get("/users/:name/following", isAuthenticated, (req, res) => {
+    User.findOne({ username: req.params.name }, (err, foundUser) => {
+        res.render("users/index.ejs", {
+            currentUser: req.session.currentUser,
+            users: foundUser.following,
+        });
+    });
+});
+
+
 // Edit get - user profile edit route
 // users.get("/account/edit", isAuthenticated, (req, res) => {
 //     User.findById(req.session.currentUser._id, (err, foundUser) => {
