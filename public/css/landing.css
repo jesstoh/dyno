@@ -1,4 +1,32 @@
-.col {
-    padding: 0;
-    margin: 0;
+main {
+    display: flex;
+    flex-wrap: wrap-reverse;
+
+}
+
+main > div {
+    width: 100%;
+}
+
+.action-container {
+    min-height: 50vh;
+}
+
+.login-btn {
+    /* border: 2px solid rgb(33,150,243); */
+}
+
+.btn {
+    border-radius: 1rem;
+}
+
+.background-container img {
+
+    min-height: 100%;
+}
+
+@media screen and (min-width: 990px) {
+    main > div {
+        width: 50%;
+    }
 }

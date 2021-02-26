@@ -2,59 +2,57 @@
     <html lang="en">
     <head>
         <%- include("../partials/head.ejs") %>
+        <link rel="stylesheet" href="/css/landing.css">
     </head>
     <body>
         <main>
-            <div class="row">
-                <div class="col s12 l6 push-l6">
-                    <nav>
-                        <div class="nav-wrapper blue darken-2">
-                            <a href="/" class="brand-logo center">DYNO</a>
-                            <ul class="right">
-                                <li><a href="/signup">Sign Up</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                        <div class="container section">
-                            <form action="/login" method="POST">
-                                <h5 class="center-align">Welcome back</h5>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input type="text" name="username" id="username" required>
-                                        <label for="username">Username</label>
-                                        <% if (wrongUser) { %>
-                                            <p class="red-text">Username not valid</p>
-                                        <%} %>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input type="password" name="password" id="password" minLength="6" maxLength="12" class="validate" required>
-                                        <label for="password">Password</label>
-                                        <% if (wrongPassword) { %>
-                                            <p class="red-text">Incorrect Password</p>
-                                        <%} %>                                
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field center">
-                                        <input type="submit" class="btn blue" value="Log In">
-                                    </div>
-                                </div>
-                                
-                            </form>
-                            <br>
-                            <div class="row">
-                                Not on Dyno yet? <a href="/signup">Sign Up</a>
+            <div class="background-container">
+                <img src="/images/climbing_background.jpg" alt="" class="responsive-img">
+            </div>
+            <div class="action-container">
+                <nav>
+                    <div class="nav-wrapper blue darken-2">
+                        <a href="/" class="brand-logo center">DYNO</a>
+                        <ul class="right">
+                            <li><a href="/signup">Sign Up</a></li>
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container section">
+                    <form action="/login" method="POST">
+                        <h5 class="center-align">Welcome back</h5>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" name="username" id="username" required>
+                                <label for="username">Username</label>
+                                <% if (wrongUser) { %>
+                                    <p class="red-text">Username not valid</p>
+                                <%} %>
                             </div>
                         </div>
-         
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="password" name="password" id="password" minLength="6" maxLength="12" class="validate" required>
+                                <label for="password">Password</label>
+                                <% if (wrongPassword) { %>
+                                    <p class="red-text">Incorrect Password</p>
+                                <%} %>                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field center">
+                                <input type="submit" class="btn blue" value="Log In">
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <br>
+                    <div class="row">
+                        Not on Dyno yet? <a href="/signup">Sign Up</a>
+                    </div>
                 </div>
-                <div class="col s12 l6 pull-l6">
-                    <img src="/images/climbing_background.jpg" alt="" class="responsive-img">
-                </div>
+                
             </div>
-
 
         </main>
         
