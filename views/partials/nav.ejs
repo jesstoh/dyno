@@ -1,22 +1,47 @@
 <div class="navbar-fixed">
+
+
+
     <nav>
         <div class="nav-wrapper blue">
             <div class="container">
                 <a href="/home" class="brand-logo left">DYNO</a>
-                <ul class="right hide-on-small-and-down">
+                <a href="#" class="sidenav-trigger right" data-target="mobile-nav"><i class="material-icons">menu</i></a>
+                <ul class="right">
                     <li><a href=""><i class="material-icons">search</i></a></li>
-                    <li><a href="/home"><i class="material-icons">home</i></a></li>
-                    <li><a href="/following">Following</a></li>
-                    <li><a href="/users/<%=currentUser.username%>"><i class="material-icons left">person</i><%=currentUser.username%></a></li>
-                    <li>
-                        <form action="/sessions?_method=DELETE" method="POST">
-                            <input type="submit" value="Log Out" class="blue btn">
-                            <!-- <button type="submit" class="small">Log Out</button> -->
-                        </form>
-                    </li>
+                    <li class="hide-on-med-and-down"><a href="/home"><i class="material-icons">home</i></a></li>
+                    <li class="hide-on-med-and-down"><a href="/following">Following</a></li>
+                    <li class="hide-on-med-and-down"><a href="" class="dropdown-trigger" data-target="profile-dropdown"><i class="material-icons left">person</i><%=currentUser.username%><i class="material-icons right">arrow_drop_down</i></a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    
 </div>
 
+<ul id="profile-dropdown" class="dropdown-content">
+    <li><a href="/users/<%=currentUser.username%>" class="blue-text">My Page</a></li>
+    <li class="valign-wrapper">
+        <form action="/sessions?_method=DELETE" method="POST">
+            <button type="submit" class="btn-flat">Log Out</button>
+        </form>
+    </li>
+</ul>
+
+<ul id="profile-dropdown-side" class="dropdown-content">
+    <li><a href="/users/<%=currentUser.username%>" class="blue-text">My Page</a></li>
+    <li>
+        <form action="/sessions?_method=DELETE" method="POST">
+            <button type="submit" class="btn-flat">Log Out</button>
+        </form>
+    </li>
+</ul>
+
+
+
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="/home">Home</a></li>
+    <li><a href="/following">Following</a></li>
+    <li><a href="" class="dropdown-trigger" data-target="profile-dropdown-side"><i class="material-icons left">person</i><%=currentUser.username%><i class="material-icons right">arrow_drop_down</i></a></li>
+</ul>

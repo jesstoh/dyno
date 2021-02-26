@@ -7,7 +7,8 @@ $(() => {
 
     $(".fixed-action-btn").floatingActionButton();
 
-
+    $(".dropdown-trigger").dropdown();
+    $(".sidenav").sidenav();
     
     // $(".modal").modal();
     

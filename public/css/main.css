@@ -2,17 +2,12 @@
     /* border: 2px solid red; */
 }
 
-form {
-    /* display: inline; */
-    /* margin-bottom: 10px; */
-    /* align-items: center; */
-}
 
-li {
+/* li {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-}
+} */
 
 
 #profile-pic {
@@ -33,3 +28,6 @@ footer {
     padding: 1rem 0;
 }
 
+#profile-dropdown-side li {
+    text-align: center;
+}
