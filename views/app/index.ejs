@@ -30,13 +30,16 @@
                                 </div>
                                 <div class="card-content">
                                     <a href="/posts/<%=post._id%>" class="post-link"></a>
-                                    <span>Likes: <%=post.likes.length%></span>
-                                    <span>Author: <a href="/users/<%=post.author%>"><%=post.author%></a></span><br>
+
+                                    <span><%=post.likes.length%> Likes</span>
+                                    <span class="right">by <a href="/users/<%=post.author%>"><%=post.author%></a></span><br>
+                                    <% if (post.location) {%>
+                                        <span class="right"><i class="material-icons location-icon">location_on</i><%=post.location%></span><br>
+                                    <%}%>
                                     
-                                    <span>location: <%=post.location%></span>
-                                    
-                                    <p><%=post.description%></p>
-                                    <span>tags: <%=post.tags%></span><br>
+                                    <p class="truncate"><%=post.description%></p>
+                                    <span><%= "#" + post.tags.join(", #")%></span><br>
+                                    <!-- <span>tags: <%=post.tags%></span><br> -->
                                     <span class="grey-text"><%=post.createdAt%></span>
                                 </div>
                             </div>

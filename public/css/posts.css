@@ -1,3 +1,18 @@
 .card-content {
     cursor: pointer;
 }
+
+p {
+    padding: 0.5rem 0;
+}
+
+i.left {
+    margin-right: 0;
+}
+
+.location-icon {
+    font-size: 1rem;
+    position: relative;
+    top: 0.2rem
+    
+}

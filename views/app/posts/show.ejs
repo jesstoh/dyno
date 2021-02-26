@@ -50,8 +50,10 @@
                             </div>
                             <span><a href="#like-list" class="modal-trigger black-text"><strong><span class="like-qty"><%=post.likes.length%></span> Likes</strong></a> </span>
                             <span class="comment-show"><strong><%=post.comments.length%> Comments</strong> </span>
+                            <% if (post.location) {%>
+                                <span class="right"><i class="material-icons left">location_on</i><%=post.location%></span><br>
+                            <%}%>
                             
-                            <span class="right">location: <%=post.location%></span><br>
                             <p><%=post.description%></p>
                             
                             <span>tags: <%=post.tags%></span><br>

@@ -46,3 +46,7 @@ p {
 .comment-show {
     margin-left: 1rem;
 }
+
+i.left {
+    margin-right: 0;
+}
