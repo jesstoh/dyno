@@ -3,7 +3,10 @@
     <head>
         <%- include("../../partials/head.ejs") %>
         <link rel="stylesheet" href="/css/post_show.css">
+        <!-- Emoji picker -->
+        <script src="https://cdn.tiny.cloud/1/xmwb6q2bv6myyuki756snb4ix03g3popvvykzh2jmiqbactr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script src="/js/post_show.js"></script>
+
     </head>
     <body>
         <header>
@@ -59,7 +62,7 @@
                         <div class="card-action comment-box">
                             <div class="row">
                                 <form action="/posts/<%=post._id%>/comment" method="POST">
-                                    <textarea name="message" id="message" placeholder="Add a comment" required></textarea> 
+                                    <textarea name="message" id="message" placeholder="Add a comment" ></textarea> 
                                     <button class="btn-small blue grey right" id="cancel-button">Cancel</button>                                  
                                     <input type="submit" class="btn-small blue right" value="POST">
                                     

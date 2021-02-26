@@ -21,4 +21,14 @@ $(() => {
                 .addClass("blue");
         }
     );
+
+
+    // Open up post when clicking on image/video
+    $(".post-card").on("click", (event) => {
+        window.location = $(event.currentTarget).find(".post-link").attr("href")
+    });
+
+    // $(".video-container iframe").on("click", (event) => {
+    //     event.preventDefault();
+    // })
 });

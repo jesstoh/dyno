@@ -9,6 +9,10 @@ textarea {
     padding: 0.5rem;
 }
 
+textarea:focus {
+    outline: none;
+}
+
 #cancel-button {
     margin-left: 1rem;
 }
@@ -33,4 +37,8 @@ textarea {
 
 span, i {
     margin-right: 1rem;
+}
+
+p {
+    padding: 0.5rem 0;
 }

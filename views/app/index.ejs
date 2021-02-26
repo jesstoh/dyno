@@ -17,12 +17,12 @@
                     <% posts.forEach(post => { %>
                         <div class="col s12 m6 l4">
                             <div class="card hoverable medium post-card">
-                                <!-- <a href="/posts/<%=post._id%>" class="post-link"></a> -->
                                 <div class="card-image">
                                     <% if (post.img) {%>
                                         <img src="<%=post.img%>" class="materialboxed">
                                     <%} else {%>
-                                        <div class="video-container">
+                                        <div class="video-container materialboxed">
+                                            <!-- <video src="<%=post.video%>" width="100%"></video> -->
                                             <iframe src="<%=post.video%>" frameborder="0" allowfullscreen></iframe>
                                         </div>
                                         

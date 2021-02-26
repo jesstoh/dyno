@@ -15,6 +15,7 @@ posts.get("/posts/new", isAuthenticated, (req, res) => {
 // Show get - show post
 posts.get("/posts/:id", isAuthenticated, (req, res) => {
     Post.findById(req.params.id, (err, postFound) => {
+        postFound.comments.reverse();
         res.render("app/posts/show.ejs", {
             currentUser: req.session.currentUser,
             post: postFound,
