@@ -116,4 +116,11 @@ posts.post("/posts/:id/comment", isAuthenticated, (req, res) => {
     );
 });
 
+// Delete post 
+posts.delete("/posts/:id", isAuthenticated, (req, res) => {
+    Post.findByIdAndDelete(req.params.id, () => {
+        res.redirect("/home");
+    })
+})
+
 module.exports = posts;

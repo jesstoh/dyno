@@ -118,7 +118,9 @@
             <!-- dropdown list -->
             <ul id="dropdown-edit" class="dropdown-content">
                 <li><a href="/posts/<%=post._id%>/edit" class="grey-text">Edit</a></li>
-                <li><a href="#" class="grey-text">Delete</a></li>
+                <li><form action="/posts/<%=post._id%>?_method=DELETE" method="POST">
+                    <button class="btn-flat" type="submit">DELETE</button>
+                </form></li>
 
             </ul>
                 

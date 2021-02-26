@@ -20,6 +20,8 @@ $(() => {
     // Instantiate modal
     $(".modal").modal();
 
+    // Instantiate dropdown
+
     // Instantiate emoji-picker
     tinymce.init({
         selector: "textarea",
@@ -65,6 +67,5 @@ $(() => {
         });
     });
 
-
-
+    
 });
