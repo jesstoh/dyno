@@ -31,15 +31,16 @@ $(() => {
         statusbar: false,
     });
 
+    // url of like list iframe
     let src = $("iframe").attr("src");
     thisPost = JSON.parse(thisPost);
+
     // Ajax put when current user click to like
     $(".like-icon").on("click", (event) => {
         // console.log(thisPost);
         $.ajax({
             url: `/posts/${thisPost._id}/like`,
-            method: "PUT"
-
+            method: "PUT",
         }).then((data) => {
             // console.log(data);
             $(".like-qty").text(data.likes.length); // update number of like
@@ -47,12 +48,23 @@ $(() => {
             $(".unlike-icon").show(); //Show "liked" icon
             // Reload iframe
             $("iframe").attr("src", src);
-        })
-        
+        });
+    });
 
+    // Ajax put when current user click to unlike
+    $(".unlike-icon").on("click", (event) => {
+        $.ajax({
+            url: `/posts/${thisPost._id}/unlike`,
+            method: "PUT",
+        }).then((data) => {
+            $(".like-qty").text(data.likes.length); // update number of like
+            $(".unlike-icon").hide(); //Hide "liked" icon 
+            $(".like-icon").show(); //Hide not yet liked icon
+            // Reload iframe
+            $("iframe").attr("src", src);
+        });
+    });
 
-    })
-    
 
 
 });

@@ -72,8 +72,20 @@ posts.put("/posts/:id/like", isAuthenticated, (req, res) => {
         { new: true },
         (err, updatedPost) => {
             // console.log(updatedPost);
-            res.send(updatedPost)
-            // res.send(updatedPost);
+            res.send(updatedPost);
+        }
+    );
+});
+
+// Update put - unlike post
+posts.put("/posts/:id/unlike", isAuthenticated, (req, res) => {
+    Post.findByIdAndUpdate(
+        req.params.id,
+        { $pull: { likes: req.session.currentUser.username } },
+        { new: true },
+        (err, updatedPost) => {
+            // console.log(updatedPost);
+            res.send(updatedPost);
         }
     );
 });
