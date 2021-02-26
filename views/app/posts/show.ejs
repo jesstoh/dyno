@@ -34,6 +34,13 @@
                                 </div>
                                 
                             <%}%>
+
+                            <% if (currentUser.username === post.author) {%>
+                                <a href="#" class="dropdown-trigger black-text right" id="edit-btn" data-target="dropdown-edit">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+
+                            <%}%>
                         </div>
                         <div class="card-content">
                             <div>
@@ -62,9 +69,7 @@
                                 <span>Edited</span>
                             <%}%>
                             
-                            <% if (currentUser.username === post.author) {%>
-                                <a href="/posts/<%=post._id%>/edit" class="btn-floating orange"><i class="material-icons">edit</i></a>
-                            <%}%>
+
                             
                         </div>
                         <div class="card-action comment-box">
@@ -108,6 +113,14 @@
                     
                 </div>
             </div>
+
+
+            <!-- dropdown list -->
+            <ul id="dropdown-edit" class="dropdown-content">
+                <li><a href="/posts/<%=post._id%>/edit" class="grey-text">Edit</a></li>
+                <li><a href="#" class="grey-text">Delete</a></li>
+
+            </ul>
                 
         </main>
         <footer>
