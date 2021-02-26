@@ -48,7 +48,7 @@ posts.get("/posts/:id/edit", isAuthenticated, (req, res) => {
     });
 });
 
-// Update get - update post
+// Update put - update post
 posts.put("/posts/:id", isAuthenticated, (req, res) => {
     req.body.tags = req.body.tags.split(",");
     req.body.edited = true;
@@ -60,6 +60,20 @@ posts.put("/posts/:id", isAuthenticated, (req, res) => {
         (err, updatedPost) => {
             console.log(updatedPost);
             res.redirect(`/posts/${req.params.id}`);
+        }
+    );
+});
+
+// Update put - like post
+posts.put("/posts/:id/like", isAuthenticated, (req, res) => {
+    Post.findByIdAndUpdate(
+        req.params.id,
+        { $push: { likes: req.session.currentUser.username } },
+        { new: true },
+        (err, updatedPost) => {
+            // console.log(updatedPost);
+            res.send(updatedPost)
+            // res.send(updatedPost);
         }
     );
 });

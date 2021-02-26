@@ -1,4 +1,4 @@
-#like:hover, #comment:hover, .comment-show {
+.like-icon:hover, .unlike-icon:hover, #comment:hover, .comment-show {
     cursor: pointer;
 
 }
@@ -35,10 +35,14 @@ textarea:focus {
 }
 
 
-span, i {
+i {
     margin-right: 1rem;
 }
 
 p {
     padding: 0.5rem 0;
+}
+
+.comment-show {
+    margin-left: 1rem;
 }

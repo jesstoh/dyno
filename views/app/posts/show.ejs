@@ -5,6 +5,10 @@
         <link rel="stylesheet" href="/css/post_show.css">
         <!-- Emoji picker -->
         <script src="https://cdn.tiny.cloud/1/xmwb6q2bv6myyuki756snb4ix03g3popvvykzh2jmiqbactr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script>let thisPost = '<%-JSON.stringify(post)%>';
+        
+        </script>
+
         <script src="/js/post_show.js"></script>
 
     </head>
@@ -34,15 +38,17 @@
                         <div class="card-content">
                             <div>
                                 <% if (!post.likes.includes(currentUser.username)) {%>
-                                    <i class="material-icons" id="like">favorite_border</i> 
+                                    <i class="material-icons like-icon">favorite_border</i>
+                                    <i class="material-icons red-text unlike-icon" style="display: none;">favorite</i> 
                                 <%} else {%>
-                                    <i class="material-icons red-text" id="like">favorite</i> 
+                                    <i class="material-icons like-icon" style="display: none;">favorite_border</i>
+                                    <i class="material-icons red-text unlike-icon">favorite</i> 
                                 <%}%>
                                 
                                 <i class="material-icons" id="comment">chat_bubble_outline</i>
                                 <span class="right">by <a href="/users/<%=post.author%>"><%=post.author%></a></span>
                             </div>
-                            <span><a href="#like-list" class="modal-trigger black-text"><strong><%=post.likes.length%> Likes</strong></a> </span>
+                            <span><a href="#like-list" class="modal-trigger black-text"><strong><span class="like-qty"><%=post.likes.length%></span> Likes</strong></a> </span>
                             <span class="comment-show"><strong><%=post.comments.length%> Comments</strong> </span>
                             
                             <span class="right">location: <%=post.location%></span><br>

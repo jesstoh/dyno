@@ -30,4 +30,29 @@ $(() => {
         menubar: false,
         statusbar: false,
     });
+
+    let src = $("iframe").attr("src");
+    thisPost = JSON.parse(thisPost);
+    // Ajax put when current user click to like
+    $(".like-icon").on("click", (event) => {
+        // console.log(thisPost);
+        $.ajax({
+            url: `/posts/${thisPost._id}/like`,
+            method: "PUT"
+
+        }).then((data) => {
+            // console.log(data);
+            $(".like-qty").text(data.likes.length); // update number of like
+            $(".like-icon").hide(); //Hide not yet liked icon
+            $(".unlike-icon").show(); //Show "liked" icon
+            // Reload iframe
+            $("iframe").attr("src", src);
+        })
+        
+
+
+    })
+    
+
+
 });
