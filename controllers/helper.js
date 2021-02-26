@@ -7,5 +7,10 @@ const isAuthenticated = (req, res, next) => {
     }
 };
 
+const formatDate = rawDate => {
 
-module.exports = { isAuthenticated };
+    let delta = Date.now() - rawDate.getTime();
+    return Math.floor(delta / (1000 * 60 * 60 * 24))
+}
+
+module.exports = { isAuthenticated, formatDate };

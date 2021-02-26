@@ -54,5 +54,9 @@ i.left {
 #edit-btn {
     position: absolute;
     bottom: -2rem;
-    left: 0.5rem;
+    right: 0;
+}
+
+.date-text {
+    font-size: smaller;
 }

@@ -36,7 +36,7 @@
                             <%}%>
 
                             <% if (currentUser.username === post.author) {%>
-                                <a href="#" class="dropdown-trigger black-text right" id="edit-btn" data-target="dropdown-edit">
+                                <a href="#" class="dropdown-trigger black-text" id="edit-btn" data-target="dropdown-edit">
                                     <i class="material-icons">more_vert</i>
                                 </a>
 
@@ -62,11 +62,20 @@
                             <%}%>
                             
                             <p><%=post.description%></p>
+                            <span><%= "#" + post.tags.join(", #")%></span><br>
+                            <span class="grey-text date-text">
+                                <% if (post.created > 1) { %>
+                                    <%=post.created%> Days Ago
+                                <% } else if (post.created === 1) { %>
+                                    1 Day Ago
+                                <%} else {%>
+                                    today
+                                <%}%>
+                                
                             
-                            <span>tags: <%=post.tags%></span><br>
-                            <span class="grey-text"><%=post.createdAt%></span> 
+                            </span> 
                             <% if (post.edited) {%>
-                                <span>Edited</span>
+                                <span class="right">Edited</span>
                             <%}%>
                             
 
@@ -87,7 +96,20 @@
                         <div class="main-comments-container card-content">
                             <% post.comments.forEach(comment => {%>
                                 <div class="comment-container">
-                                    <a href="/users/<%=comment.user%>"><%=comment.user%> </a> <span class="grey-text comment-date"><%=comment.createdAt%></span> <br>
+                                    <a href="/users/<%=comment.user%>"><%=comment.user%> </a> 
+                                    
+                                    
+                                    <span class="grey-text comment-date">
+                                        <% if (comment.created > 1) { %>
+                                            <%=comment.created%> Days Ago
+                                        <% } else if (comment.created === 1) { %>
+                                            1 Day Ago
+                                        <%} else {%>
+                                            today
+                                        <%}%>
+                                    </span> <br>
+
+
                                     <span class="comment-details"><%=comment.message%></span>
                                     
                                 </div>

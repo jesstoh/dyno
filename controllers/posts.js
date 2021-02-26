@@ -4,7 +4,7 @@ const posts = express.Router();
 const Post = require("../models/posts.js");
 const User = require("../models/users.js");
 const isAuthenticated = require("./helper.js").isAuthenticated;
-
+const formatDate = require("./helper.js").formatDate;
 // ROUTES
 
 // New get - new post form
@@ -14,11 +14,17 @@ posts.get("/posts/new", isAuthenticated, (req, res) => {
 
 // Show get - show post
 posts.get("/posts/:id", isAuthenticated, (req, res) => {
-    Post.findById(req.params.id, (err, postFound) => {
-        postFound.comments.reverse();
+    Post.findById(req.params.id, (err, foundPost) => {
+        foundPost.comments.reverse();
+        foundPost.comments.forEach(comment => {
+            comment.created = formatDate(comment.createdAt);
+        });
+
+        foundPost.created = formatDate(foundPost.createdAt);
+        // console.log(foundPost)
         res.render("app/posts/show.ejs", {
             currentUser: req.session.currentUser,
-            post: postFound,
+            post: foundPost,
         });
     });
 });
@@ -116,11 +122,11 @@ posts.post("/posts/:id/comment", isAuthenticated, (req, res) => {
     );
 });
 
-// Delete post 
+// Delete post
 posts.delete("/posts/:id", isAuthenticated, (req, res) => {
     Post.findByIdAndDelete(req.params.id, () => {
         res.redirect("/home");
-    })
-})
+    });
+});
 
 module.exports = posts;

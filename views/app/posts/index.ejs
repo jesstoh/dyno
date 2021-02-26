@@ -19,7 +19,7 @@
                 <%}%>
                 <div class="row">
                     <% posts.forEach(post => { %>
-                        <div class="col s12 m6 l4">
+                        <div class="col s12 m6 xl4">
                             <div class="card hoverable medium post-card">
                                 
                                 <div class="card-image">
@@ -36,6 +36,17 @@
                                     <a href="/posts/<%=post._id%>" class="post-link"></a>
                                     <span><%=post.likes.length%> Likes</span>
                                     <span class="right">by <a href="/users/<%=post.author%>"><%=post.author%></a></span><br>
+                                    <span class="grey-text date-text">
+                                        <% if (post.created > 1) { %>
+                                            <%=post.created%> Days Ago
+                                        <% } else if (post.created === 1) { %>
+                                            1 Day Ago
+                                        <%} else {%>
+                                            today
+                                        <%}%>
+                                    
+                                    </span>
+
                                     <% if (post.location) {%>
                                         <span class="right"><i class="material-icons location-icon">location_on</i><%=post.location%></span><br>
                                     <%}%>
@@ -43,7 +54,6 @@
                                     <p class="truncate"><%=post.description%></p>
                                     <span><%= "#" + post.tags.join(", #")%></span><br>
                                     <!-- <span>tags: <%=post.tags%></span><br> -->
-                                    <span class="grey-text"><%=post.createdAt%></span>
                                 </div>
                             </div>
                         </div>

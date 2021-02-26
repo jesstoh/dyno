@@ -4,6 +4,7 @@ const apps = express.Router();
 const User = require("../models/users.js");
 const Post = require("../models/posts.js");
 const isAuthenticated = require("./helper.js").isAuthenticated;
+const formatDate = require("./helper.js").formatDate;
 
 // ROUTES
 apps.get("/", (req, res) => {
@@ -19,6 +20,9 @@ apps.get("/home", isAuthenticated, (req, res) => {
     Post.find()
         .sort({ _id: -1 })
         .exec((err, posts) => {
+            posts.forEach((post) => {
+                post.created = formatDate(post.createdAt);
+            });
             res.render("app/index.ejs", {
                 currentUser: req.session.currentUser,
                 posts,
@@ -29,8 +33,11 @@ apps.get("/home", isAuthenticated, (req, res) => {
 // Index get - posts of all following users
 apps.get("/following", isAuthenticated, (req, res) => {
     Post.find({ author: { $in: req.session.currentUser.following } })
-        .sort({_id: -1})
+        .sort({ _id: -1 })
         .exec((err, posts) => {
+            posts.forEach((post) => {
+                post.created = formatDate(post.createdAt);
+            });
             res.render("app/posts/index.ejs", {
                 currentUser: req.session.currentUser,
                 posts,
@@ -43,7 +50,7 @@ apps.get("/following", isAuthenticated, (req, res) => {
 // });
 
 apps.get("/dummy", (req, res) => {
-    res.render("users/edit.ejs")
-})
+    res.render("users/edit.ejs");
+});
 
 module.exports = apps;
