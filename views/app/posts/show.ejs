@@ -94,6 +94,7 @@
                             
                         </div>
                         <div class="main-comments-container card-content">
+                            <h5>Comments</h5>
                             <% post.comments.forEach(comment => {%>
                                 <div class="comment-container">
                                     <a href="/users/<%=comment.user%>"><%=comment.user%> </a> 
@@ -130,7 +131,7 @@
                     
                     
                     <h6 class="center-align"><strong>Likes</strong></h6>
-                    <iframe src="/posts/<%=post._id%>/like" frameborder="0" height="500" width="100%"></iframe>
+                    <iframe id="like-board" src="/posts/<%=post._id%>/like" frameborder="0" height="500" width="100%"></iframe>
                     
                     
                 </div>

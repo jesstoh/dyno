@@ -34,7 +34,7 @@ $(() => {
     });
 
     // url of like list iframe
-    let src = $("iframe").attr("src");
+    let src = $("#like-board").attr("src");
     thisPost = JSON.parse(thisPost);
 
     // Ajax put when current user click to like
@@ -49,7 +49,7 @@ $(() => {
             $(".like-icon").hide(); //Hide not yet liked icon
             $(".unlike-icon").show(); //Show "liked" icon
             // Reload iframe
-            $("iframe").attr("src", src);
+            $("#like-board").attr("src", src);
         });
     });
 
@@ -63,7 +63,7 @@ $(() => {
             $(".unlike-icon").hide(); //Hide "liked" icon 
             $(".like-icon").show(); //Hide not yet liked icon
             // Reload iframe
-            $("iframe").attr("src", src);
+            $("#like-board").attr("src", src);
         });
     });
 
