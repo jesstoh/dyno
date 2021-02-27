@@ -133,8 +133,30 @@ users.get("/accounts/edit", isAuthenticated, (req, res) => {
     // res.send(req.session.currentUser);
     User.findById(req.session.currentUser._id, (err, foundUser) => {
         // res.send(req.session.currentUser);
+        console.log(foundUser);
         res.render("users/edit.ejs", { currentUser: req.session.currentUser });
     });
+});
+
+// Update - update user profile
+users.put("/users", isAuthenticated, (req, res) => {
+    User.findByIdAndUpdate(
+        req.session.currentUser._id,
+        {
+            $set: {
+                img: req.body.img,
+                bio: req.body.bio,
+                email: req.body.email,
+                location: req.body.ctr,
+            },
+        },
+        { new: true },
+        (err, updatedUser) => {
+            console.log(updatedUser);
+            req.session.currentUser = updatedUser;
+            res.redirect(`/users/${req.session.currentUser.username}`);
+        }
+    );
 });
 
 module.exports = users;
