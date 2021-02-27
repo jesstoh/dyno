@@ -8,15 +8,14 @@ $(() => {
     $(".materialboxed").materialbox();
 
     // Initialize select
-    
 
     let query = JSON.parse(thisQuery);
-    const catMatch = { tags: "Tag", author: "User", location: "Place" };
-    console.log(query)
+    console.log(query);
 
     if (query) {
         $("#q").val(query.q);
         $(`#cat option[value=${query.cat}]`).prop("selected", true);
-    }
+    } 
+
     $("select").formSelect();
 });

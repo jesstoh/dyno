@@ -9,8 +9,8 @@
                 <a href="#" class="sidenav-trigger right" data-target="mobile-nav"><i class="material-icons">menu</i></a>
                 <ul class="right">
                     <li><a href=""><i class="material-icons">search</i></a></li>
-                    <li class="hide-on-med-and-down"><a href="/home"><i class="material-icons">home</i></a></li>
-                    <li class="hide-on-med-and-down"><a href="/following">Following</a></li>
+                    <li class="hide-on-med-and-down home-menu"><a href="/home"><i class="material-icons">home</i></a></li>
+                    <li class="hide-on-med-and-down following-menu"><a href="/following">Following</a></li>
                     <li class="hide-on-med-and-down"><a href="" class="dropdown-trigger" data-target="profile-dropdown"><i class="material-icons left">person</i><%=currentUser.username%><i class="material-icons right">arrow_drop_down</i></a></li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
 
 
 <ul class="sidenav" id="mobile-nav">
-    <li><a href="/home">Home</a></li>
-    <li><a href="/following">Following</a></li>
+    <li class="home-menu"><a href="/home">Home</a></li>
+    <li class="following-menu"><a href="/following">Following</a></li>
     <li><a href="" class="dropdown-trigger" data-target="profile-dropdown-side"><i class="material-icons left">person</i><%=currentUser.username%><i class="material-icons right">arrow_drop_down</i></a></li>
 </ul>

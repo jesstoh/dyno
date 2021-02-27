@@ -42,6 +42,7 @@ apps.get("/following", isAuthenticated, (req, res) => {
             res.render("app/posts/index.ejs", {
                 currentUser: req.session.currentUser,
                 posts,
+                query: {},
             });
         });
 });
@@ -67,9 +68,31 @@ apps.get("/search", isAuthenticated, (req, res) => {
                 query: req.query,
             });
         });
+});
 
-    // res.send()
-    // res.send(req.query)
+// Index - showing search result of following
+apps.get("/search/following", isAuthenticated, (req, res) => {
+    // If search input is empty string, redirect to home
+    if (!req.query.q.trim()) {
+        res.redirect("/following");
+    }
+
+    // Create query parameter and regex pattern to ignore case
+    Post.find({
+        author: { $in: req.session.currentUser.following },
+        [req.query.cat]: new RegExp(req.query.q, "i"),
+    })
+        .sort({ _id: -1 })
+        .exec((err, posts) => {
+            posts.forEach((post) => {
+                post.created = formatDate(post.createdAt);
+            });
+            res.render("app/posts/index.ejs", {
+                currentUser: req.session.currentUser,
+                posts,
+                query: req.query,
+            });
+        });
 });
 
 // apps.get("/back", (req, res) => {
