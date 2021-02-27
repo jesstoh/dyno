@@ -128,13 +128,13 @@ users.get("/users/:name/following", isAuthenticated, (req, res) => {
     });
 });
 
-
-// Edit get - user profile edit route
-// users.get("/account/edit", isAuthenticated, (req, res) => {
-//     User.findById(req.session.currentUser._id, (err, foundUser) => {
-//         res.render("users/account/edit.ejs"),
-//             { currentUser: req.session.currentUser };
-//     });
-// });
+// Edit get - user profile edit page route
+users.get("/accounts/edit", isAuthenticated, (req, res) => {
+    // res.send(req.session.currentUser);
+    User.findById(req.session.currentUser._id, (err, foundUser) => {
+        // res.send(req.session.currentUser);
+        res.render("users/edit.ejs", { currentUser: req.session.currentUser });
+    });
+});
 
 module.exports = users;
