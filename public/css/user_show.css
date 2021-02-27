@@ -1,0 +1,19 @@
+span {
+    margin-right: 1rem;
+}
+
+.summary-row {
+    font-size: 1.1rem;
+}
+
+#profile-pic {
+    border: 2px solid black;
+
+}
+
+/* .image-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid black;
+} */
