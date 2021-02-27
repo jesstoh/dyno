@@ -4,25 +4,37 @@ main {
 
 }
 
+h3 {
+    font-weight: 500;
+    margin-bottom: 3rem;
+}
+
 main > div {
     width: 100%;
 }
 
 .action-container {
     min-height: 50vh;
-}
 
-.login-btn {
-    /* border: 2px solid rgb(33,150,243); */
 }
 
 .btn {
     border-radius: 1rem;
 }
 
-.background-container img {
 
+.background-container img, .background-container div, .slides li{
     min-height: 100%;
+
+}
+
+.action-container .row a {
+    width: 80%;
+}
+
+.btn-container {
+    margin: 5rem auto;
+
 }
 
 @media screen and (min-width: 990px) {

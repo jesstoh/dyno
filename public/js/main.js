@@ -11,5 +11,7 @@ $(() => {
     $(".sidenav").sidenav();
     
     // $(".modal").modal();
+
+    $(".slider").slider();
     
 })
