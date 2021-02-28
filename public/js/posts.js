@@ -19,16 +19,4 @@ $(() => {
 
     // Change select option color
     $(".cat-select ul li span").addClass("blue-text");
-
-
-    // Event listener when scroll to bottom
-    $(window).on("scroll", event => {
-
-        if (($(window).innerHeight() + $(window).scrollTop() + 30) > $("body").innerHeight()) {
-            console.log("end of page")
-        }
-    })
-
-
-
 });

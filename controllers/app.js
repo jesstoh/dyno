@@ -18,37 +18,11 @@ apps.get("/", (req, res) => {
 });
 
 // Index get - home page when logged in (showing all posts)
-// apps.get("/home", isAuthenticated, (req, res) => {
-//     Post.find()
-//         .sort({ _id: -1 })
-//         .exec((err, posts) => {
-//             posts.forEach((post) => {
-//                 post.created = formatDate(post.createdAt);
-//             });
-//             res.render("app/index.ejs", {
-//                 currentUser: req.session.currentUser,
-//                 posts,
-//                 query: {},
-//             });
-//         });
-// });
-
-// Index get - home page With infinite scrolling
 apps.get("/home", isAuthenticated, (req, res) => {
-    // Number of post to skip
-    let skipNum = 0;
-    if (req.query.page) {
-        skipNum += (req.query.page - 1) * pageLimit;
-    }
-
     Post.find()
-    .sort({ _id: -1 })
-    .skip(skipNum)
-    .limit(pageLimit)
-    .exec((err, posts) => {
-        if (err) {
-            console.log("error message", err.message)
-        } else {
+        .sort({ _id: -1 })
+        .limit(pageLimit)
+        .exec((err, posts) => {
             posts.forEach((post) => {
                 post.created = formatDate(post.createdAt);
             });
@@ -56,11 +30,77 @@ apps.get("/home", isAuthenticated, (req, res) => {
                 currentUser: req.session.currentUser,
                 posts,
                 query: {},
-                // lastPostId: posts[posts.length - 1]._id, (will throw )
             });
-        }
-    });
-    
+        });
+});
+
+// Index get - home page With infinite scrolling
+// apps.get("/home", isAuthenticated, (req, res) => {
+//     // Number of post to skip
+//     let skipNum = 0;
+//     if (req.query.page) {
+//         skipNum += (req.query.page - 1) * pageLimit;
+//     }
+
+//     Post.find()
+//         .sort({ _id: -1 })
+//         .skip(skipNum)
+//         .limit(pageLimit)
+//         .exec((err, posts) => {
+//             if (err) {
+//                 console.log("error message", err.message);
+//             } else {
+//                 posts.forEach((post) => {
+//                     post.created = formatDate(post.createdAt);
+//                 });
+//                 res.render("app/index.ejs", {
+//                     currentUser: req.session.currentUser,
+//                     posts,
+//                     query: {},
+//                     // lastPostId: posts[posts.length - 1]._id, (will throw )
+//                 });
+//             }
+//         });
+// });
+
+// Home Page Scrolling route
+apps.get("/home/scroll", isAuthenticated, (req, res) => {
+    // Number of post to skip
+    let skipNum = 0;
+    if (req.query.page) {
+        skipNum += (req.query.page - 1) * pageLimit;
+    }
+
+    Post.find()
+        .sort({ _id: -1 })
+        .skip(skipNum)
+        .limit(pageLimit)
+        .exec((err, posts) => {
+            posts.forEach((post) => {
+                post.created = formatDate(post.createdAt);
+            });
+            res.send({ posts });
+        });
+});
+
+// Scrolling route for following posts
+apps.get("/following/scroll", isAuthenticated, (req, res) => {
+    // Number of post to skip
+    let skipNum = 0;
+    if (req.query.page) {
+        skipNum += (req.query.page - 1) * pageLimit;
+    }
+
+    Post.find({ author: { $in: req.session.currentUser.following } })
+        .sort({ _id: -1 })
+        .skip(skipNum)
+        .limit(pageLimit)
+        .exec((err, posts) => {
+            posts.forEach((post) => {
+                post.created = formatDate(post.createdAt);
+            });
+            res.send({ posts });
+        });
 });
 
 // Index get - posts of all following users
