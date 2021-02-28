@@ -9,6 +9,9 @@ h3 {
     margin-bottom: 3rem;
 }
 
+h5 {
+    margin-bottom: 2rem;
+}
 main > div {
     width: 100%;
 }
@@ -37,6 +40,12 @@ main > div {
 
 }
 
+.form-container, .btn-container {
+    max-width: 500px;
+    max-width: 70%;
+}
+
+/* Shaking animation when key in wrong info on login or signup form */
 .wrong-info {
     animation: shake 0.3s linear 2;
 }
