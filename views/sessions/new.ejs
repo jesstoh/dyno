@@ -17,7 +17,7 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="container section">
+                <div class="container section form-container">
                     <form action="/login" method="POST">
                         <h5 class="center-align">Welcome back</h5>
                         <div class="row">
@@ -58,5 +58,10 @@
         <footer>
             <%- include("../partials/footer.ejs") %>
         </footer>
+        <script>
+            if (<%=wrongUser%> || <%=wrongPassword%>) {
+                $(".form-container").addClass("wrong-info");
+            };
+        </script>
     </body>
 </html>
