@@ -5,6 +5,8 @@ const User = require("../models/users.js");
 const Post = require("../models/posts.js");
 const isAuthenticated = require("./helper.js").isAuthenticated;
 const formatDate = require("./helper.js").formatDate;
+const seedPosts = require("../models/seed_posts.js"); //Seed of posts
+const pageLimit = 10; // Number of posts to show before showing next batch while scrolling
 
 // ROUTES
 apps.get("/", (req, res) => {
@@ -19,6 +21,23 @@ apps.get("/", (req, res) => {
 apps.get("/home", isAuthenticated, (req, res) => {
     Post.find()
         .sort({ _id: -1 })
+        .exec((err, posts) => {
+            posts.forEach((post) => {
+                post.created = formatDate(post.createdAt);
+            });
+            res.render("app/index.ejs", {
+                currentUser: req.session.currentUser,
+                posts,
+                query: {},
+            });
+        });
+});
+
+// Index get - home page With infinite scrolling
+apps.get("/home", isAuthenticated, (req, res) => {
+    Post.find()
+        .sort({ _id: -1 })
+        .limit(pageLimit)
         .exec((err, posts) => {
             posts.forEach((post) => {
                 post.created = formatDate(post.createdAt);
@@ -99,8 +118,12 @@ apps.get("/search/following", isAuthenticated, (req, res) => {
 //     res.redirect("back");
 // });
 
-apps.get("/dummy", (req, res) => {
-    res.render("users/edit.ejs");
+// Seeding
+apps.get("/seed/newposts", (req, res) => {
+    Post.create(seedPosts, (err, createdPosts) => {
+        console.log(createdPosts);
+        res.redirect("/");
+    });
 });
 
 module.exports = apps;
