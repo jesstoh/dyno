@@ -6,7 +6,7 @@ const Post = require("../models/posts.js");
 const isAuthenticated = require("./helper.js").isAuthenticated;
 const formatDate = require("./helper.js").formatDate;
 const seedPosts = require("../models/seed_posts.js"); //Seed of posts
-const pageLimit = 10; // Number of posts to show before showing next batch while scrolling
+const pageLimit = 9; // Number of posts to show before showing next batch while scrolling
 
 // ROUTES
 apps.get("/", (req, res) => {
@@ -18,27 +18,37 @@ apps.get("/", (req, res) => {
 });
 
 // Index get - home page when logged in (showing all posts)
-apps.get("/home", isAuthenticated, (req, res) => {
-    Post.find()
-        .sort({ _id: -1 })
-        .exec((err, posts) => {
-            posts.forEach((post) => {
-                post.created = formatDate(post.createdAt);
-            });
-            res.render("app/index.ejs", {
-                currentUser: req.session.currentUser,
-                posts,
-                query: {},
-            });
-        });
-});
+// apps.get("/home", isAuthenticated, (req, res) => {
+//     Post.find()
+//         .sort({ _id: -1 })
+//         .exec((err, posts) => {
+//             posts.forEach((post) => {
+//                 post.created = formatDate(post.createdAt);
+//             });
+//             res.render("app/index.ejs", {
+//                 currentUser: req.session.currentUser,
+//                 posts,
+//                 query: {},
+//             });
+//         });
+// });
 
 // Index get - home page With infinite scrolling
 apps.get("/home", isAuthenticated, (req, res) => {
+    // Number of post to skip
+    let skipNum = 0;
+    if (req.query.page) {
+        skipNum += (req.query.page - 1) * pageLimit;
+    }
+
     Post.find()
-        .sort({ _id: -1 })
-        .limit(pageLimit)
-        .exec((err, posts) => {
+    .sort({ _id: -1 })
+    .skip(skipNum)
+    .limit(pageLimit)
+    .exec((err, posts) => {
+        if (err) {
+            console.log("error message", err.message)
+        } else {
             posts.forEach((post) => {
                 post.created = formatDate(post.createdAt);
             });
@@ -46,8 +56,11 @@ apps.get("/home", isAuthenticated, (req, res) => {
                 currentUser: req.session.currentUser,
                 posts,
                 query: {},
+                // lastPostId: posts[posts.length - 1]._id, (will throw )
             });
-        });
+        }
+    });
+    
 });
 
 // Index get - posts of all following users
