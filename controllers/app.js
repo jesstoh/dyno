@@ -107,6 +107,7 @@ apps.get("/following/scroll", isAuthenticated, (req, res) => {
 apps.get("/following", isAuthenticated, (req, res) => {
     Post.find({ author: { $in: req.session.currentUser.following } })
         .sort({ _id: -1 })
+        .skip(pageLimit)
         .exec((err, posts) => {
             posts.forEach((post) => {
                 post.created = formatDate(post.createdAt);
