@@ -1,6 +1,18 @@
 $(() => {
+    // INFINITE SCROLLING 
+
     let page = 1; // Declare current page
     const $postContainer = $(".post-container>.row");
+
+    // Define url prefix for search, home, following route
+    let urlPrefix;
+    if (window.location.href.includes("search")) {
+        // search route prefix
+        urlPrefix = window.location + "&page="
+    } else {
+        // home & following route prefixes
+        urlPrefix = window.location + "?page="
+    }
 
     // Event listener when scroll to bottom
     $(window).on("scroll", (event) => {
@@ -9,16 +21,15 @@ $(() => {
             $(window).innerHeight() + $(window).scrollTop() + 30 >
             $("body").innerHeight()
         ) {
-            // console.log("end of page");
-            page++;
+
+            page++; //Increase page number each time scroll to bottom of page
 
             // Fetching next data
             $.ajax({
-                url: window.location + "/scroll?page=" + page,
-                // url: "/home/scroll?page=" + page,
+                url: urlPrefix + page, 
             }).then((data) => {
                 console.log(data.posts);
-
+                // Only render to front end if there is data fetched from database
                 if (data.posts) {
                     data.posts.forEach((post) => {
                         const $newPost = $("<div>").addClass("col s12 m6 xl4");

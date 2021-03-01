@@ -6,7 +6,7 @@ const Post = require("../models/posts.js");
 const isAuthenticated = require("./helper.js").isAuthenticated;
 const formatDate = require("./helper.js").formatDate;
 const seedPosts = require("../models/seed_posts.js"); //Seed of posts
-const pageLimit = 9; // Number of posts to show before showing next batch while scrolling
+const pageLimit = 12; // Number of posts to show before showing next batch while scrolling
 
 // ROUTES
 apps.get("/", (req, res) => {
@@ -19,54 +19,10 @@ apps.get("/", (req, res) => {
 
 // Index get - home page when logged in (showing all posts)
 apps.get("/home", isAuthenticated, (req, res) => {
-    Post.find()
-        .sort({ _id: -1 })
-        .limit(pageLimit)
-        .exec((err, posts) => {
-            posts.forEach((post) => {
-                post.created = formatDate(post.createdAt);
-            });
-            res.render("app/index.ejs", {
-                currentUser: req.session.currentUser,
-                posts,
-                query: {},
-            });
-        });
-});
-
-// Index get - home page With infinite scrolling
-// apps.get("/home", isAuthenticated, (req, res) => {
-//     // Number of post to skip
-//     let skipNum = 0;
-//     if (req.query.page) {
-//         skipNum += (req.query.page - 1) * pageLimit;
-//     }
-
-//     Post.find()
-//         .sort({ _id: -1 })
-//         .skip(skipNum)
-//         .limit(pageLimit)
-//         .exec((err, posts) => {
-//             if (err) {
-//                 console.log("error message", err.message);
-//             } else {
-//                 posts.forEach((post) => {
-//                     post.created = formatDate(post.createdAt);
-//                 });
-//                 res.render("app/index.ejs", {
-//                     currentUser: req.session.currentUser,
-//                     posts,
-//                     query: {},
-//                     // lastPostId: posts[posts.length - 1]._id, (will throw )
-//                 });
-//             }
-//         });
-// });
-
-// Home Page Scrolling route
-apps.get("/home/scroll", isAuthenticated, (req, res) => {
     // Number of post to skip
     let skipNum = 0;
+
+    // Infinite scrolling skip numbers
     if (req.query.page) {
         skipNum += (req.query.page - 1) * pageLimit;
     }
@@ -76,47 +32,53 @@ apps.get("/home/scroll", isAuthenticated, (req, res) => {
         .skip(skipNum)
         .limit(pageLimit)
         .exec((err, posts) => {
-            posts.forEach((post) => {
-                post.created = formatDate(post.createdAt);
-            });
-            res.send({ posts });
+            if (err) {
+                console.log("error message", err.message);
+            } else {
+                posts.forEach((post) => {
+                    post.created = formatDate(post.createdAt);
+                });
+                if (skipNum === 0) {
+                    res.render("app/index.ejs", {
+                        currentUser: req.session.currentUser,
+                        posts,
+                        query: {},
+                        // lastPostId: posts[posts.length - 1]._id, (will throw )
+                    });
+                } else {
+                    // Infinite scrolling data
+                    res.send({ posts });
+                }
+            }
         });
 });
 
-// Scrolling route for following posts
-apps.get("/following/scroll", isAuthenticated, (req, res) => {
-    // Number of post to skip
-    let skipNum = 0;
-    if (req.query.page) {
-        skipNum += (req.query.page - 1) * pageLimit;
-    }
-
-    Post.find({ author: { $in: req.session.currentUser.following } })
-        .sort({ _id: -1 })
-        .skip(skipNum)
-        .limit(pageLimit)
-        .exec((err, posts) => {
-            posts.forEach((post) => {
-                post.created = formatDate(post.createdAt);
-            });
-            res.send({ posts });
-        });
-});
 
 // Index get - posts of all following users
 apps.get("/following", isAuthenticated, (req, res) => {
+    // Number of post to skip
+    let skipNum = 0;
+    if (req.query.page) {
+        skipNum += (req.query.page - 1) * pageLimit;
+    }
+
     Post.find({ author: { $in: req.session.currentUser.following } })
         .sort({ _id: -1 })
-        .skip(pageLimit)
+        .skip(skipNum)
+        .limit(pageLimit)
         .exec((err, posts) => {
             posts.forEach((post) => {
                 post.created = formatDate(post.createdAt);
             });
-            res.render("app/posts/index.ejs", {
-                currentUser: req.session.currentUser,
-                posts,
-                query: {},
-            });
+            if (skipNum === 0) {
+                res.render("app/posts/index.ejs", {
+                    currentUser: req.session.currentUser,
+                    posts,
+                    query: {},
+                });
+            } else {
+                res.send({ posts });
+            }
         });
 });
 
@@ -167,10 +129,6 @@ apps.get("/search/following", isAuthenticated, (req, res) => {
             });
         });
 });
-
-// apps.get("/back", (req, res) => {
-//     res.redirect("back");
-// });
 
 // Seeding
 apps.get("/seed/newposts", (req, res) => {
