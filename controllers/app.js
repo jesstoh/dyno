@@ -53,7 +53,6 @@ apps.get("/home", isAuthenticated, (req, res) => {
         });
 });
 
-
 // Index get - posts of all following users
 apps.get("/following", isAuthenticated, (req, res) => {
     // Number of post to skip
@@ -91,17 +90,30 @@ apps.get("/search", isAuthenticated, (req, res) => {
 
     // Create query parameter and regex pattern to ignore case
     const query = { [req.query.cat]: new RegExp(req.query.q, "i") };
+
+    // Define number of document to skip for infinite scrolling
+    let skipNum = 0;
+    if (req.query.page) {
+        skipNum += (req.query.page - 1) * pageLimit;
+    }
+
     Post.find(query)
         .sort({ _id: -1 })
+        .skip(skipNum)
+        .limit(pageLimit)
         .exec((err, posts) => {
             posts.forEach((post) => {
                 post.created = formatDate(post.createdAt);
             });
-            res.render("app/index.ejs", {
-                currentUser: req.session.currentUser,
-                posts,
-                query: req.query,
-            });
+            if (skipNum === 0) {
+                res.render("app/index.ejs", {
+                    currentUser: req.session.currentUser,
+                    posts,
+                    query: req.query,
+                });
+            } else {
+                res.send({ posts });
+            }
         });
 });
 
@@ -112,21 +124,34 @@ apps.get("/search/following", isAuthenticated, (req, res) => {
         res.redirect("/following");
     }
 
+    // Define number of document to skip for infinite scrolling
+    let skipNum = 0;
+    if (req.query.page) {
+        skipNum += (req.query.page - 1) * pageLimit;
+    }
+
     // Create query parameter and regex pattern to ignore case
     Post.find({
         author: { $in: req.session.currentUser.following },
         [req.query.cat]: new RegExp(req.query.q, "i"),
     })
         .sort({ _id: -1 })
+        .skip(skipNum)
+        .limit(pageLimit)
         .exec((err, posts) => {
             posts.forEach((post) => {
                 post.created = formatDate(post.createdAt);
             });
-            res.render("app/posts/index.ejs", {
-                currentUser: req.session.currentUser,
-                posts,
-                query: req.query,
-            });
+
+            if (skipNum === 0) {
+                res.render("app/posts/index.ejs", {
+                    currentUser: req.session.currentUser,
+                    posts,
+                    query: req.query,
+                });
+            } else {
+                res.send({ posts });
+            }
         });
 });
 
