@@ -77,9 +77,16 @@ $(() => {
                             $cardContent.append($locationSpan);
                         }
 
-                        const tagString = "#" + post.tags.join(", #");
-                        $cardContent.append(`<p class="truncate">${post.description}</p>
-                        <span>${tagString}</span><br>`);
+                        $cardContent.append(`<p class="truncate">${post.description}</p>`);
+
+                        if (post.tags.length > 0) {
+                            const tagString = "#" + post.tags.join(", #");
+                            $cardContent.append(`<span>${tagString}</span><br>`);
+                        }
+                        
+                        
+
+                        
 
                         $newCard.append($cardContent);
 

@@ -72,8 +72,12 @@
                                     <%}%>
                                     
                                     <p class="truncate"><%=post.description%></p>
-                                    <span><%= "#" + post.tags.join(", #")%></span><br>
-                                    <!-- <span>tags: <%=post.tags%></span><br> -->
+                                    <% if (post.tags.length > 0) { %>
+                                        <span><%= "#" + post.tags.join(", #")%></span><br>
+
+                                    <%}%>
+                                    
+
 
                                 </div>
                             </div>

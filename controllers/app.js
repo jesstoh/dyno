@@ -7,7 +7,7 @@ const isAuthenticated = require("./helper.js").isAuthenticated;
 const formatDate = require("./helper.js").formatDate;
 const postsDisplay = require("./helper.js").postsDisplay;
 const seedPosts = require("../models/seed_posts.js"); //Seed of posts
-const pageLimit = 6; // Number of posts to show before showing next batch while scrolling
+const pageLimit = 12; // Number of posts to show before showing next batch while scrolling
 
 // ROUTES
 apps.get("/", (req, res) => {

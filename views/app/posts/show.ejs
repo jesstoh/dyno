@@ -62,7 +62,10 @@
                             <%}%>
                             
                             <p><%=post.description%></p>
-                            <span><%= "#" + post.tags.join(", #")%></span><br>
+                            <% if (post.tags.length > 0) { %>
+                                <span><%= "#" + post.tags.join(", #")%></span><br>
+
+                            <%}%>
                             <span class="grey-text date-text">
                                 <% if (post.created > 1) { %>
                                     <%=post.created%> Days Ago
