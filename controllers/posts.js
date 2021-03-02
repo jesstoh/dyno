@@ -5,6 +5,7 @@ const Post = require("../models/posts.js");
 const User = require("../models/users.js");
 const isAuthenticated = require("./helper.js").isAuthenticated;
 const formatDate = require("./helper.js").formatDate;
+const chipToTag = require("./helper.js").chipToTag;
 // ROUTES
 
 // New get - new post form
@@ -56,7 +57,8 @@ posts.get("/posts/:id/edit", isAuthenticated, (req, res) => {
 
 // Update put - update post
 posts.put("/posts/:id", isAuthenticated, (req, res) => {
-    req.body.tags = req.body.tags.split(",");
+    // req.body.tags = req.body.tags.split(",");
+    req.body.tags = chipToTag(req.body.tags);
     req.body.edited = true;
     console.log(req.body);
     Post.findByIdAndUpdate(
@@ -99,11 +101,13 @@ posts.put("/posts/:id/unlike", isAuthenticated, (req, res) => {
 // Create - create new post
 posts.post("/posts", (req, res) => {
     req.body.author = req.session.currentUser.username;
-    req.body.tags = req.body.tags.split(",");
+    req.body.tags = chipToTag(req.body.tags); // Convert chips to tag array
+    // console.log(req.body.tags)
+    // console.log(req.body);
 
     Post.create(req.body, (err, createdPost) => {
         console.log(createdPost);
-        res.redirect("/home");
+        res.redirect(`/posts/${createdPost._id}`);
     });
 });
 
