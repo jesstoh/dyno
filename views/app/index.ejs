@@ -41,16 +41,22 @@
                     <% posts.forEach(post => { %>
                         <div class="col s12 m6 xl4">
                             <div class="card hoverable medium post-card">
-                                <div class="card-image">
+                            
+                                <div class="card-image" style="--img: url('<%=post.img%>')">
+                                 
                                     <% if (post.img) {%>
                                         <img src="<%=post.img%>" class="materialboxed">
                                     <%} else {%>
                                         <div class="video-container materialboxed">
-                                            <!-- <video src="<%=post.video%>" width="100%"></video> -->
-                                            <iframe src="<%=post.video%>" frameborder="0" allowfullscreen></iframe>
+                                            <video src="<%=post.video%>" width="100%" controls></video>
+                                            <!-- <iframe src="<%=post.video%>" frameborder="0" allowfullscreen></iframe> -->
                                         </div>
                                         
                                     <%}%>
+
+
+                         
+                                    
                                 </div>
                                 <div class="card-content">
                                     <a href="/posts/<%=post._id%>" class="post-link"></a>

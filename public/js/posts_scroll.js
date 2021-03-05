@@ -36,7 +36,7 @@ $(() => {
                         const $newCard = $("<div>").addClass(
                             "card hoverable medium post-card"
                         );
-                        const $cardImage = $("<div>").addClass("card-image");
+                        const $cardImage = $("<div>").addClass("card-image").css("--img", `url(${post.img})`);
                         const $cardContent = $("<div>").addClass(
                             "card-content"
                         );
