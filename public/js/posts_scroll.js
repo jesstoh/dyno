@@ -14,12 +14,12 @@ $(() => {
         urlPrefix = window.location + "?page=";
     }
 
-    // Event listener when scroll to bottom
-    $(window).on("scroll", (event) => {
+    // Function for infinite scrolling
+    const infiniteScroll = (event) => {
         // When end of window scroll
         if (
             $(window).innerHeight() + $(window).scrollTop() + 30 >
-            $("body").innerHeight()
+            $(document).innerHeight()
         ) {
             page++; //Increase page number each time scroll to bottom of page
 
@@ -111,5 +111,10 @@ $(() => {
                 }
             });
         }
-    });
+    };
+
+    // Event listener when scroll to bottom
+    $(window).on("scroll", infiniteScroll);
+    // Event listener when scroll to bottom for touch devices
+    $(document).on("scrollstart", infiniteScroll);
 });
