@@ -55,9 +55,9 @@ db.once("open", () => console.log("connected to mongo"));
 
 // MIDDLEWARE
 // Redirect if routes do not exist
-// app.use("*", (req, res) => {
-//     res.redirect("/");
-// })
+app.use("*", (req, res) => {
+    res.redirect("/");
+})
 
 //SERVER CONNECTION
 app.listen(port, () => {

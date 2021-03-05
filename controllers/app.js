@@ -90,10 +90,16 @@ apps.get("/search/following", isAuthenticated, (req, res) => {
 
 // Seeding
 apps.get("/seed/newposts", (req, res) => {
-    Post.create(seedPosts, (err, createdPosts) => {
-        console.log(createdPosts);
-        res.redirect("/");
-    });
+    if (req.session.currentUser.username === "admin") {
+        Post.create(seedPosts, (err, createdPosts) => {
+            console.log(createdPosts);
+            res.redirect("/");
+        });
+
+    } else {
+        res.redirect("/")
+    }
+
 });
 
 module.exports = apps;
