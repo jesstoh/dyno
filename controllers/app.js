@@ -41,7 +41,15 @@ apps.get("/search", isAuthenticated, (req, res) => {
     // Create query parameter and regex pattern to ignore case
     const queryIn = { [req.query.cat]: new RegExp(req.query.q, "i") };
 
-    postsDisplay(queryIn, "app/index.ejs", req.query, pageLimit, Post, req, res);
+    postsDisplay(
+        queryIn,
+        "app/index.ejs",
+        req.query,
+        pageLimit,
+        Post,
+        req,
+        res
+    );
 });
 
 // Index - showing search result of following
@@ -50,13 +58,28 @@ apps.get("/search/following", isAuthenticated, (req, res) => {
     if (!req.query.q.trim()) {
         res.redirect("/following");
     }
-
+    console.log("OK");
+    const followingArr = req.session.currentUser.following
+    if (req.query.cat === "author") {
+        followingArr.push(new RegExp(req.query.q, "i"));
+    }
     const queryIn = {
         author: { $in: req.session.currentUser.following },
         [req.query.cat]: new RegExp(req.query.q, "i"),
     };
 
-    postsDisplay(queryIn,"app/posts/index.ejs", req.query, pageLimit, Post, req, res);
+
+    console.log(req.session.currentUser.following);
+    console.log(queryIn);
+    postsDisplay(
+       queryIn,
+        "app/posts/index.ejs",
+        req.query,
+        pageLimit,
+        Post,
+        req,
+        res
+    );
 });
 
 // Seeding
