@@ -1,5 +1,5 @@
 $(() => {
-    // INFINITE SCROLLING 
+    // INFINITE SCROLLING
 
     let page = 1; // Declare current page
     const $postContainer = $(".post-container>.row");
@@ -8,10 +8,10 @@ $(() => {
     let urlPrefix;
     if (window.location.href.includes("search")) {
         // search route prefix
-        urlPrefix = window.location + "&page="
+        urlPrefix = window.location + "&page=";
     } else {
         // home & following route prefixes
-        urlPrefix = window.location + "?page="
+        urlPrefix = window.location + "?page=";
     }
 
     // Event listener when scroll to bottom
@@ -21,12 +21,11 @@ $(() => {
             $(window).innerHeight() + $(window).scrollTop() + 30 >
             $("body").innerHeight()
         ) {
-
             page++; //Increase page number each time scroll to bottom of page
 
             // Fetching next data
             $.ajax({
-                url: urlPrefix + page, 
+                url: urlPrefix + page,
             }).then((data) => {
                 console.log(data.posts);
                 // Only render to front end if there is data fetched from database
@@ -36,20 +35,29 @@ $(() => {
                         const $newCard = $("<div>").addClass(
                             "card hoverable medium post-card"
                         );
-                        const $cardImage = $("<div>").addClass("card-image").css("--img", `url(${post.img})`);
+                        const $cardImage = $("<div>").addClass("card-image");
                         const $cardContent = $("<div>").addClass(
                             "card-content"
                         );
                         if (post.img) {
+                            $cardImage.css("--img", `url(${post.img})`);
                             $cardImage.html(
                                 `<img src=${post.img} class="materialboxed">`
                             );
                         } else {
-                            $cardImage.html(`<div class="video-container materialboxed">
-                                    
-                            <iframe src=${post.video} frameborder="0" allowfullscreen></iframe>
-                        </div>`);
+                            $cardImage.css(
+                                "--img",
+                                `url(${
+                                    post.video.slice(post.video.length - 3) +
+                                    "jpg"
+                                })`
+                            );
+                            $cardImage.html(`
+                            <div class="video-container materialboxed">                                    
+                                <video src=${post.video} width="100%" controls></video>
+                           </div>`);
                         }
+
                         $newCard.append($cardImage);
 
                         $cardContent.html(`<a href="/posts/${post._id}" class="post-link"></a>
@@ -77,16 +85,16 @@ $(() => {
                             $cardContent.append($locationSpan);
                         }
 
-                        $cardContent.append(`<p class="truncate">${post.description}</p>`);
+                        $cardContent.append(
+                            `<p class="truncate">${post.description}</p>`
+                        );
 
                         if (post.tags.length > 0) {
                             const tagString = "#" + post.tags.join(", #");
-                            $cardContent.append(`<span>${tagString}</span><br>`);
+                            $cardContent.append(
+                                `<span>${tagString}</span><br>`
+                            );
                         }
-                        
-                        
-
-                        
 
                         $newCard.append($cardContent);
 
@@ -98,8 +106,6 @@ $(() => {
                                 .find(".post-link")
                                 .attr("href");
                         });
-
-                        
                     });
                     $(".materialboxed").materialbox();
                 }
