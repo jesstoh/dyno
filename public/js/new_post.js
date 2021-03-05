@@ -14,6 +14,7 @@ $(() => {
                 "heel hook": null,
                 overhang: null,
                 news: null,
+                video: null
             },
         },
         onChipAdd: function () {
@@ -24,4 +25,15 @@ $(() => {
         },
     });
 
+
+    // Instantiate emoji-picker
+    tinymce.init({
+        selector: "textarea",
+        forced_root_block: "",
+        plugins: "emoticons autoresize",
+        toolbar: "emoticons",
+        toolbar_location: "bottom",
+        menubar: false,
+        statusbar: false,
+    });
 });

@@ -1,13 +1,23 @@
 // DEPENDENCIES
 const express = require("express");
 const posts = express.Router();
+const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 const Post = require("../models/posts.js");
 const User = require("../models/users.js");
 const isAuthenticated = require("./helper.js").isAuthenticated;
 const formatDate = require("./helper.js").formatDate;
 const chipToTag = require("./helper.js").chipToTag;
-// ROUTES
 
+// CONFIG
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// ROUTES
 // New get - new post form
 posts.get("/posts/new", isAuthenticated, (req, res) => {
     res.render("app/posts/new.ejs", { currentUser: req.session.currentUser });
@@ -17,7 +27,7 @@ posts.get("/posts/new", isAuthenticated, (req, res) => {
 posts.get("/posts/:id", isAuthenticated, (req, res) => {
     Post.findById(req.params.id, (err, foundPost) => {
         foundPost.comments.reverse();
-        foundPost.comments.forEach(comment => {
+        foundPost.comments.forEach((comment) => {
             comment.created = formatDate(comment.createdAt);
         });
 
@@ -99,16 +109,45 @@ posts.put("/posts/:id/unlike", isAuthenticated, (req, res) => {
 });
 
 // Create - create new post
-posts.post("/posts", (req, res) => {
+// posts.post("/posts", (req, res) => {
+//     req.body.author = req.session.currentUser.username;
+//     req.body.tags = chipToTag(req.body.tags); // Convert chips to tag array
+//     // console.log(req.body.tags)
+//     // console.log(req.body);
+
+//     Post.create(req.body, (err, createdPost) => {
+//         console.log(createdPost);
+//         res.redirect(`/posts/${createdPost._id}`);
+//     });
+// });
+
+posts.post("/posts", upload.single("media"), (req, res) => {
     req.body.author = req.session.currentUser.username;
     req.body.tags = chipToTag(req.body.tags); // Convert chips to tag array
-    // console.log(req.body.tags)
-    // console.log(req.body);
 
-    Post.create(req.body, (err, createdPost) => {
-        console.log(createdPost);
-        res.redirect(`/posts/${createdPost._id}`);
-    });
+    // Upload file to cloudinary
+    cloudinary.uploader.upload(
+        req.file.path,
+        {
+            resource_type: "auto",
+        },
+        (err, result) => {
+            if (result.resource_type === "image") {
+                req.body.img = result.url;
+            } else if (result.resource_type === "video") {
+                req.body.video = result.url;
+            } else {
+                res.redirect("/posts/new")
+            }
+            Post.create(req.body, (err, createdPost) => {
+                console.log(createdPost);
+                res.redirect(`/posts/${createdPost._id}`);
+            });
+        }
+    );
+
+
+    console.log("OK");
 });
 
 // Create post - create new comment

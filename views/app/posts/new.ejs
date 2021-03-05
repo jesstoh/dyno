@@ -3,6 +3,8 @@
     <head>
         <%- include("../../partials/head.ejs") %>
         <link rel="stylesheet" href="/css/new_post.css">
+        <!-- Emoji picker -->
+        <script src="https://cdn.tiny.cloud/1/xmwb6q2bv6myyuki756snb4ix03g3popvvykzh2jmiqbactr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script src="/js/new_post.js"></script>
     </head>
     <body>
@@ -11,9 +13,9 @@
         </header>
         <main>
             <!-- <%- include("../../partials/main.ejs") %> -->
-            <div class="container">
-                <form action="/posts" method="POST">
-                    <div class="row">
+            <div class="container section form-container">
+                <form action="/posts" method="POST" enctype="multipart/form-data" >
+                    <!-- <div class="row">
                         <div class="input-field col s12">
                             <input type="url" id="img" name="img">
                             <label for="img">Image URL</label>
@@ -24,32 +26,31 @@
                             <input type="url" id="video" name="video">
                             <label for="video">Video URL</label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" id="description" name="description">
-                            <label for="description">Description</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" id="location" name="location">
-                            <label for="location">Location</label>
-                        </div>
-                    </div>
-                    <!-- <div class="row">
-                        <div class="input-field col s12">
-                            <input type="text" id="tags" name="tags">
-                            <label for="tags">Tags</label>
-                        </div>
                     </div> -->
                     <div class="row">
-                        <div class="input-field col s12">
-                            <div class="chips">
+                        <label for="media" class="col s3 m2">Photo/Video*</label>
+
+                        <input type="file" id="media" name="media" class="col s8 m9" required>
+ 
+                    </div>
+                    <div class="row">
+                        <label for="description" class="col s3 m2">Description</label>
+                        <textarea name="description" id="description" class="col s8 m9"></textarea>
+                        <!-- <input type="text" id="description" class="col s8 m9" name="description"> -->
+                            
+                    </div>
+                    <div class="row">
+                        <label for="location" class="col s3 m2">Location</label>
+                        <input type="text" id="location" name="location" class="col s8 m10">
+                    </div>
+                    <div class="row">
+                        <label for="tags" class="col s3 m2">Tags</label>
+   
+                            <div class="chips col s8 m10">
                                 <input class="custom-class">
                             </div>
                             <input type="hidden" id="tags" name="tags" value="[]">
-                        </div>
+                     
                     </div>
 
                     <div class="row">

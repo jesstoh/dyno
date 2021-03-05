@@ -9,7 +9,7 @@
         let tagArray = '<%-JSON.stringify(post.tags)%>';
         
         </script>
-
+        <script src="https://cdn.tiny.cloud/1/xmwb6q2bv6myyuki756snb4ix03g3popvvykzh2jmiqbactr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script src="/js/post_edit.js"></script>
     </head>
     <body>
@@ -17,9 +17,9 @@
             <%- include("../../partials/nav.ejs") %>
         </header>
         <main>
-            <div class="container section">
+            <div class="container section edit-form-container">
                 <form action="/posts/<%=post._id%>?_method=PUT" method="POST">
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="input-field col s12">
                             <input type="url" id="img" name="img" value="<%=post.img%>">
                             <label for="img">Image URL</label>
@@ -30,10 +30,11 @@
                             <input type="url" id="video" name="video" value="<%=post.video%>">
                             <label for="video">Video URL</label>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="input-field col s12">
-                            <input type="text" id="description" name="description" value="<%=post.description%>">
+                            <textarea name="description" id="description"><%=post.description%></textarea>
+                            <!-- <input type="text" id="description" name="description" value="<%=post.description%>"> -->
                             <label for="description">Description</label>
                         </div>
                     </div>
@@ -45,8 +46,12 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <div class="chips">
-                                <input class="custom-class">
+                            <label for="tags">Tags</label>
+                        </div>
+                        <div class="input-field col s12">
+                            
+                            <div class="chips">                                
+                               <input class="custom-class">
                             </div>
                             <input type="hidden" id="tags" name="tags">
                         </div>

@@ -1,7 +1,7 @@
 $(() => {
     // Data from post
     tagArray = JSON.parse(tagArray);
-    
+
     // Function to convert tag array to chip data
     const tagToChip = (arr) => {
         const chipArr = [];
@@ -12,7 +12,7 @@ $(() => {
     };
     const chipArr = tagToChip(tagArray);
 
-    $('#tags').val(JSON.stringify(chipArr));
+    $("#tags").val(JSON.stringify(chipArr));
 
     // Initiate chips
     const elems = document.querySelector(".chips");
@@ -29,6 +29,7 @@ $(() => {
                 "heel hook": null,
                 overhang: null,
                 news: null,
+                video: null,
             },
         },
         data: chipArr,
@@ -40,4 +41,14 @@ $(() => {
         },
     });
 
+    // Instantiate emoji-picker
+    tinymce.init({
+        selector: "textarea",
+        forced_root_block: "",
+        plugins: "emoticons autoresize",
+        toolbar: "emoticons",
+        toolbar_location: "bottom",
+        menubar: false,
+        statusbar: false,
+    });
 });

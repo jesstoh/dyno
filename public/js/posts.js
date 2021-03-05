@@ -19,4 +19,6 @@ $(() => {
 
     // Change select option color
     $(".cat-select ul li span").addClass("blue-text");
+
+
 });

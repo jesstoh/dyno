@@ -1,3 +1,18 @@
 #cancel-button {
     margin-right: 0.5rem;
 }
+
+.form-container, .edit-form-container {
+    margin-top: 3rem;
+    /* border-radius: 1rem;
+    border: 5px solid gray; */
+
+}
+
+.form-container .row {
+    margin-bottom: 5rem;
+}
+
+.edit-form-container textarea {
+    margin-top: 1rem;
+}
