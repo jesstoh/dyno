@@ -14,13 +14,11 @@ $(() => {
         $("#q").val(query.q);
         $(`#cat option[value=${query.cat}]`).prop("selected", true);
     }
-    // Initialize select
-    $("select").formSelect();
+    // // Initialize select
+    // $("select").formSelect();
 
-    // Change select option color
-    $(".cat-select ul li span").addClass("blue-text");
-
-    $("#cat-container ul li span").addClass("blue-text");
+    // // Change select option color
+    // $("#cat-container ul li span").addClass("blue-text");
 
 
 });

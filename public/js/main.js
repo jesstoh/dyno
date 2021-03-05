@@ -13,5 +13,12 @@ $(() => {
     // $(".modal").modal();
 
     $(".slider").slider();
+
+
+    // Initialize select
+    $("select").formSelect();
+
+    // Change select option color
+    $("#cat-container ul li span").addClass("blue-text");
     
 })
