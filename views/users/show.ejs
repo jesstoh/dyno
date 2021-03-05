@@ -13,12 +13,13 @@
         <main>
             <%- include("../partials/main.ejs") %>
             <section class="container section profile-container">
-                <div class="row">
-                    <div class="col s12 center">
+                
+                    <!-- <div class="col s12 center"> -->
                         <div class="image-container">
-                            <img src="<%=user.img%>" class="circle responsive-img" id="profile-pic" width="150">
+                            <img src="<%=user.img%>" id="profile-pic">
                         </div>
-                    </div>
+                    <!-- </div> -->
+                <div class="row">
                     <div class="col s12 center">
                         <strong><%=user.username%></strong>
                     </div>  
@@ -32,16 +33,6 @@
                     <span><%=posts.length%> Posts</span>
                     <span><a href="#followers" class="modal-trigger"><%=user.followers.length%></a> Followers</span>
                     <span><a href="#following" class="modal-trigger"><%=user.following.length%></a> Following</span>
-
-                    <!-- <div class="col s4">
-                        <%=posts.length%> Posts
-                    </div>
-                    <div class="col s4">
-                        <a href="#followers" class="modal-trigger"><%=user.followers.length%></a> Followers
-                    </div>
-                    <div class="col s4">
-                        <a href="#following" class="modal-trigger"><%=user.following.length%></a> Following
-                    </div> -->
                 </div>
                 <div class="row">
                     <div class="col s12 center">

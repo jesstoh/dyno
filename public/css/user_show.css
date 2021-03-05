@@ -14,7 +14,8 @@ span {
 }
 
 #profile-pic {
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    background-color: rgb(233, 231, 231);
 
 }
 
@@ -34,10 +35,6 @@ span {
 
 }
 
-/* .post-card {
-    height: 11vw;
-    margin-bottom: 1rem;
-} */
 
 .post-card img {
     width: 100%;
@@ -47,6 +44,24 @@ span {
     max-height: 100%;
 }
 
+.image-container {
+    /* border: 3px solid rgb(83, 83, 83); */
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    
+}
+
+.image-container img {
+    max-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    /* object-position: 50% 50%; */
+}
 
 @media screen and  (min-width:600px) {
     .post-card {
