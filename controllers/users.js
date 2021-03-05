@@ -1,10 +1,20 @@
 // DEPENDENCIES
 const express = require("express");
 const users = express.Router();
+const cloudinary = require("cloudinary").v2;
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 const User = require("../models/users.js");
 const Post = require("../models/posts.js");
 const bcrypt = require("bcrypt");
 const isAuthenticated = require("./helper.js").isAuthenticated;
+
+// CONFIG
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // ROUTES
 
@@ -139,24 +149,77 @@ users.get("/accounts/edit", isAuthenticated, (req, res) => {
 });
 
 // Update - update user profile
-users.put("/users", isAuthenticated, (req, res) => {
-    User.findByIdAndUpdate(
-        req.session.currentUser._id,
-        {
-            $set: {
-                img: req.body.img,
-                bio: req.body.bio,
-                email: req.body.email,
-                location: req.body.ctr,
+// users.put("/users", isAuthenticated, (req, res) => {
+//     User.findByIdAndUpdate(
+//         req.session.currentUser._id,
+//         {
+//             $set: {
+//                 img: req.body.img,
+//                 bio: req.body.bio,
+//                 email: req.body.email,
+//                 location: req.body.ctr,
+//             },
+//         },
+//         { new: true },
+//         (err, updatedUser) => {
+//             console.log(updatedUser);
+//             req.session.currentUser = updatedUser;
+//             res.redirect(`/users/${req.session.currentUser.username}`);
+//         }
+//     );
+// });
+
+// Update - update user profile
+users.put("/users", isAuthenticated, upload.single("img"), (req, res) => {
+    if (req.file) {
+        cloudinary.uploader.upload(
+            req.file.path,
+            {
+                resource_type: "image",
             },
-        },
-        { new: true },
-        (err, updatedUser) => {
-            console.log(updatedUser);
-            req.session.currentUser = updatedUser;
-            res.redirect(`/users/${req.session.currentUser.username}`);
-        }
-    );
+            (err, result) => {
+                User.findByIdAndUpdate(
+                    req.session.currentUser._id,
+                    {
+                        $set: {
+                            img: result.url,
+                            bio: req.body.bio,
+                            email: req.body.email,
+                            location: req.body.ctr,
+                        },
+                    },
+                    { new: true },
+                    (err, updatedUser) => {
+                        console.log(updatedUser);
+                        req.session.currentUser = updatedUser;
+                        res.redirect(
+                            `/users/${req.session.currentUser.username}`
+                        );
+                    }
+                );
+            }
+        );
+    } else {
+
+        User.findByIdAndUpdate(
+            req.session.currentUser._id,
+            {
+                $set: {
+                    bio: req.body.bio,
+                    email: req.body.email,
+                    location: req.body.ctr,
+                },
+            },
+            { new: true },
+            (err, updatedUser) => {
+                console.log(updatedUser);
+                req.session.currentUser = updatedUser;
+                res.redirect(
+                    `/users/${req.session.currentUser.username}`
+                );
+            }
+        );
+    }
 });
 
 module.exports = users;

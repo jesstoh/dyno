@@ -10,11 +10,21 @@
         <main>
             <%- include("../partials/main.ejs") %>
             <div class="container section">
-                <form action="/users?_method=PUT" method="POST">
+                <form action="/users?_method=PUT" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input type="url" id="img" name="img" value="<%=currentUser.img%>">
-                            <label for="img">Profile Image Url</label>
+                            <label for="img">Profile Image</label>
+
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        
+                        <div class="input-field col s12">
+
+                            <input type="file" id="img" name="img" class="col s8 m9">
+                            <!-- <input type="url" id="img" name="img" value="<%=currentUser.img%>"> -->
+                            
                         </div>
                     </div>
                     <div class="row">
