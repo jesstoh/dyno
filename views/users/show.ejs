@@ -69,11 +69,10 @@
                                       
                 </div>
             </section>
-            
-            <section class="container post-container section">
+            <!-- <section class="container post-container section">
                 <div class="row">
                     <% posts.forEach(post => { %>
-                        <div class="col s4 m3">
+                        <div class="col s4 m3 post-card">
                             <div class="card hoverable post-card">
                                 <a href="/posts/<%=post._id%>" class="post-link"></a>
                                 <div class="card-image">
@@ -81,7 +80,7 @@
                                         <img src="<%=post.img%>" alt="">
                                     <%} else {%>
                                         <div class="video-container">
-                                            <iframe src="<%=post.video%>" frameborder="0" allowfullscreen></iframe>
+                                            <video src="<%=post.video%>" width="100%" controls></video>
                                         </div>
                                         
                                     <%}%>
@@ -93,6 +92,26 @@
                     <%})%>
                     
                 </div>
+            </section> -->
+
+
+            <section class="container post-container section">
+                
+                    <% posts.forEach(post => { %>                        
+                            <div class="post-card">
+                                <a href="/posts/<%=post._id%>" class="post-link"></a>
+                               
+                                    <% if (post.img) {%>
+                                        <img src="<%=post.img%>" alt="">
+                                    <%} else {%>
+                                        <div class="video-container">
+                                            <video src="<%=post.video%>" width="100%" controls></video>
+                                        </div>
+                                    <%}%>
+                                </div>                                
+                      
+                    <%})%>
+  
             </section>
 
             <div class="modal" id="followers">
