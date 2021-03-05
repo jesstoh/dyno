@@ -109,18 +109,6 @@ posts.put("/posts/:id/unlike", isAuthenticated, (req, res) => {
 });
 
 // Create - create new post
-// posts.post("/posts", (req, res) => {
-//     req.body.author = req.session.currentUser.username;
-//     req.body.tags = chipToTag(req.body.tags); // Convert chips to tag array
-//     // console.log(req.body.tags)
-//     // console.log(req.body);
-
-//     Post.create(req.body, (err, createdPost) => {
-//         console.log(createdPost);
-//         res.redirect(`/posts/${createdPost._id}`);
-//     });
-// });
-
 posts.post("/posts", upload.single("media"), (req, res) => {
     req.body.author = req.session.currentUser.username;
     req.body.tags = chipToTag(req.body.tags); // Convert chips to tag array
