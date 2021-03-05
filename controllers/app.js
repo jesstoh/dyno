@@ -58,21 +58,27 @@ apps.get("/search/following", isAuthenticated, (req, res) => {
     if (!req.query.q.trim()) {
         res.redirect("/following");
     }
-    console.log("OK");
-    const followingArr = req.session.currentUser.following
+
+
+    let queryIn;
+    let queryRegex = new RegExp(req.query.q, "i");
+
     if (req.query.cat === "author") {
-        followingArr.push(new RegExp(req.query.q, "i"));
+        const processed = req.session.currentUser.following.filter(
+            (followingUser) => {
+                return queryRegex.test(followingUser);
+            }
+        );
+        queryIn = { author: { $in: processed } };
+    } else {
+        queryIn = {
+            author: { $in: req.session.currentUser.following },
+            [req.query.cat]: queryRegex,
+        };
     }
-    const queryIn = {
-        author: { $in: req.session.currentUser.following },
-        [req.query.cat]: new RegExp(req.query.q, "i"),
-    };
 
-
-    console.log(req.session.currentUser.following);
-    console.log(queryIn);
     postsDisplay(
-       queryIn,
+        queryIn,
         "app/posts/index.ejs",
         req.query,
         pageLimit,

@@ -9,16 +9,17 @@ $(() => {
 
     let query = JSON.parse(thisQuery);
     console.log(query);
+    console.log(query.cat);
 
     if (query) {
         $("#q").val(query.q);
         $(`#cat option[value=${query.cat}]`).prop("selected", true);
     }
-    // // Initialize select
-    // $("select").formSelect();
+    // Initialize select
+    $("select").formSelect();
 
-    // // Change select option color
-    // $("#cat-container ul li span").addClass("blue-text");
+    // Change select option color
+    $("#cat-container ul li span").addClass("blue-text");
 
 
 });

@@ -24,13 +24,14 @@
 }
 
 #q {
-    border-radius: 1rem !important;
+    border-radius: 0.8rem !important;
     padding-left: 0.5rem !important;
     display: inline-block !important;
     background-color: rgba(212, 212, 212, 0.3) !important;
     color: white;
     font-size: 1rem;
     width: 8rem;
+    height: 2.5rem;
 }
 
 #cat {
@@ -42,6 +43,8 @@
     margin-left: 0.5rem;
     /* margin-right: 2rem; */
     color: white;
+    height: 2.5rem;
+
 }
 
 /* Category select */
@@ -49,10 +52,11 @@
     display: inline;
     width: 4rem;
     color: white;
-    border-radius: 1rem;
+    border-radius: 0.8rem;
     padding-left: 0.5rem !important;
     font-size: 1rem;
     background-color: rgba(212, 212, 212, 0.3) !important;
+    height: 2.5rem;
 }
 
 body {
@@ -72,6 +76,11 @@ footer {
 #profile-dropdown-side li {
     text-align: center;
 }
+
+.select-wrapper .caret {
+    fill: white;
+}
+
 
 
 @media screen and (min-width: 600px) {

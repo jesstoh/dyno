@@ -1,8 +1,8 @@
 $(() => {
-    $(".goback").on("click", () => {
-        console.log("test");
-        window.history.back();
-    })
+    // $(".goback").on("click", () => {
+    //     console.log("test");
+    //     window.history.back();
+    // })
 
 
     $(".fixed-action-btn").floatingActionButton();
