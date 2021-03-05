@@ -87,7 +87,7 @@ const seedPosts = [
     },
     {
         tags: ["ifsc"],
-        author: "littleclimber",
+        author: "flash",
         description: "Look who wins the IFSC championship this year",
         img:
             "https://www.insidethegames.biz/media/image/153105/o/MdfHOouU4a9pSdp0",
@@ -263,7 +263,7 @@ const seedPosts = [
         tags: ["outdoor"],
         description: "Nice spot to do overhang ",
         location: "",
-        author: "littleclimber",
+        author: "flash",
         img:
             "http://res.cloudinary.com/dufcxaocn/image/upload/v1614912981/yrqdxb8mpnckc4yrr65o.jpg",
     },
@@ -272,7 +272,7 @@ const seedPosts = [
         description:
             "Great climbing session last Sat, near fall through crash mat 😬",
         location: "Boulder Park",
-        author: "littleclimber",
+        author: "flash",
         img:
             "http://res.cloudinary.com/dufcxaocn/image/upload/v1614927730/gnyit75ylhzvc4olmpxe.jpg",
     },

@@ -21,7 +21,7 @@
                         <h5 class="center-align">Welcome to Dyno</h5>
                         <div class="row">
                             <div class="input-field col s12">
-                                <input type="text" name="username" id="username" pattern="[a-zA-Z0-9]{4,12}" class="validate" title="Only 4 - 12 alphanumeric char is allowed" required>
+                                <input type="text" name="username" id="username" pattern="[a-zA-Z0-9]{4,16}" class="validate" title="Only 4 - 16 alphanumeric char is allowed" required>
                                 <label for="username">Username</label>
                                 <% if (taken) { %>
                                     <p class="red-text">Username is already taken</p>
